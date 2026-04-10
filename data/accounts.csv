@@ -1,2 +1,2 @@
-C101,JohnDoe,pass123,john@email.com,0123456789
-C102,jane,jane123,jane@gmail,012
+C101	johndoe	pass123	john@email.com	0123456789	John	Doe	Mr
+M	manager	password	jane@email.com	0987654321	Jane	Juliet	Ms
