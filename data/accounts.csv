@@ -1,2 +1,8 @@
-C101	johndoe	pass123	john@email.com	0123456789	John	Doe	Mr
-M	manager	password	jane@email.com	0987654321	Jane	Juliet	Ms
+C101	johndoe	pass123 	John	Doe	Mr	johndoe@email.com	0117654321
+C102	alexsmith	pass456 	Alex	Smith	Ms	alex@email.com	0187654321
+C103	mikechen	pass789	Mike	Chen	Mr	mike@email.com	0145678923
+C104	sarahlee	pass012	Sarah	Lee	Ms	sarah@email.com	0156789234
+SS001	tommypark	staff123	Tommy	Park	Mr
+SS002	emilyrose	staff456	Emily	Rose	Ms
+SS003	davidkim	staff789	David	Kim	Mr
+M001	manager	password	Johnny	Lock	Mr

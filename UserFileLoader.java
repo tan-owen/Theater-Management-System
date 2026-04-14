@@ -58,19 +58,17 @@ public class UserFileLoader {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Split using \t. The -1 is CRITICAL so it doesn't delete trailing empty tabs!
                 String[] data = line.split("\t", -1); 
                 if (data.length < 5) continue; 
 
-                // Extract all data up front to prevent column misalignment
-                String id = data[0];
-                String name = data[1];
-                String pass = data[2];
-                String email = data.length > 3 ? data[3] : "";
-                String phone = data.length > 4 ? data[4] : "";
-                String firstName = data.length > 5 ? data[5] : "";
-                String lastName = data.length > 6 ? data[6] : "";
-                String pronounce = data.length > 7 ? data[7] : "";
+                String id = data[0].trim();
+                String name = data[1].trim();
+                String pass = data[2].trim();
+                String firstName = data[3].trim();
+                String lastName = data[4].trim();
+                String pronounce = data[5].trim();
+                String email = (data.length > 6 && !data[6].isEmpty()) ? data[6].trim() : "";
+                String phone = (data.length > 7 && !data[7].isEmpty()) ? data[7].trim() : "";
 
                 switch (id.charAt(0)) {
                     case 'C':

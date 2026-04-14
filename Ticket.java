@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 //ID PREFIX TK
-public class Ticket {
+public class Ticket implements Discussable {
     private String ticketID;
     private String ticketTitle;
     private String ticketDescription;
@@ -40,8 +40,35 @@ public class Ticket {
     public InteractionLog getInteractionLog() { return interactionLog; }
     public List<Comment> getDiscussionThread() { return discussionThread; }
 
+    // Setters
+    public void setSupportStaff(SupportStaff supportStaff) { this.supportStaff = supportStaff; }
+    public void setInteractionLog(InteractionLog interactionLog) { this.interactionLog = interactionLog; }
+
     public String getTicketType(){
         return this.getClass().getSimpleName();
     };
+
+    @Override
+    public void addComment(User author, String message) {
+        Comment newComment = new Comment(author, message);
+        this.discussionThread.add(newComment);
+        // Save the comment to CSV for persistence
+        DiscussionFileLoader.saveCommentToCSV(this.ticketID, author, message);
+    }
+
+    @Override
+    public String getDiscussion() {
+        StringBuilder discussion = new StringBuilder();
+        
+        if (this.discussionThread == null || this.discussionThread.isEmpty()) {
+            discussion.append("No comments yet.");
+        } else {
+            for (Comment comment : this.discussionThread) {
+                discussion.append(comment.getFormattedComment()).append("\n");
+            }
+        }
+        
+        return discussion.toString();
+    }
 
 }

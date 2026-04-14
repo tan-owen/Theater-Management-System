@@ -1,0 +1,22 @@
+RF001	2026-04-08T10:30:00	C101	Created refund ticket for closed showing
+RF001	2026-04-08T11:20:00	SS001	Assigned to handle refund request
+RF001	2026-04-08T11:35:00	C101	Updated ticket with additional information
+RF002	2026-04-08T14:15:00	C102	Created refund ticket for duplicate charge
+RF002	2026-04-08T15:00:00	SS002	Reviewed and approved duplicate charge refund
+TD001	2026-04-09T11:20:00	C104	Reported login technical difficulty
+TD001	2026-04-09T12:00:00	SS001	Provided initial troubleshooting steps
+TD001	2026-04-09T13:00:00	SS001	Escalated to account reset procedure
+TD002	2026-04-09T13:40:00	C101	Reported payment gateway issue on mobile
+TD002	2026-04-09T14:30:00	SS003	Identified platform-specific issue and provided workaround
+TD003	2026-04-09T15:30:00	C102	Reported missing confirmation email
+CR001	2026-04-09T08:50:00	C103	Requested seat location change
+CR001	2026-04-09T10:00:00	SS002	Approved change request
+PR001	2026-04-10T10:00:00	C101	Reported critical checkout crash
+PR001	2026-04-10T10:45:00	SS001	Escalated as critical issue affecting multiple users
+PR001	2026-04-10T15:30:00	SS001	Confirmed issue resolved and notified customer
+PR002	2026-04-10T11:30:00	C102	Reported tickets not appearing in account
+PR002	2026-04-10T12:15:00	SS002	Provided refresh and logout procedure
+PR003	2026-04-10T12:15:00	C103	Reported discount code application failure
+PR003	2026-04-10T13:00:00	SS003	Asked for specific discount code and timing
+TK001	2026-04-10T09:00:00	C101	Asked about sharing tickets with friends
+TK002	2026-04-10T13:20:00	C103	Inquired about group booking discounts

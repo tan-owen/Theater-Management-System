@@ -36,7 +36,7 @@ public class TicketFileLoader {
                 
             } else if (ticket instanceof ChangeRequestTicket) {
                 ChangeRequestTicket cr = (ChangeRequestTicket) ticket;
-                out.printf("%s§%s§%s%n", baseData, cr.getMovieTicketID()); 
+                out.printf("%s\t%s%n", baseData, cr.getMovieTicketID()); 
                 
             } else if (ticket instanceof ProblemTicket) {
                 ProblemTicket pt = (ProblemTicket) ticket;
@@ -136,6 +136,54 @@ public class TicketFileLoader {
         } catch (IOException e) {
             System.err.println("Error reading Ticket CSV: " + e.getMessage());
         }
+
+        // Load discussions from CSV and populate them into tickets
+        DiscussionFileLoader.loadDiscussionsIntoTickets(tickets);
+
         return tickets;
+    }
+
+    // Update an existing ticket in the CSV (or append if not present)
+    public static boolean updateTicketInCSV(Ticket ticket) {
+        List<Ticket> tickets = loadTickets();
+        boolean found = false;
+        for (int i = 0; i < tickets.size(); i++) {
+            if (tickets.get(i).getTicketID().equalsIgnoreCase(ticket.getTicketID())) {
+                tickets.set(i, ticket);
+                found = true;
+                break;
+            }
+        }
+        if (!found) tickets.add(ticket);
+
+        // Write full list back to file (overwrite)
+        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_PATH, false)))) {
+            for (Ticket t : tickets) {
+                String custID = (t.getCustomer() != null) ? t.getCustomer().getUserID() : "UNASSIGNED";
+                String staffID = (t.getSupportStaff() != null) ? t.getSupportStaff().getUserID() : "UNASSIGNED";
+                String baseData = String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s", 
+                    t.getTicketID(), t.getTicketTitle(), t.getTicketDescription(), t.getCreationTime().toString(), custID, staffID, t.getPriorityLevel());
+
+                if (t instanceof RefundTicket) {
+                    RefundTicket rt = (RefundTicket) t;
+                    out.printf("%s\t%s\t%s\t%s%n", baseData, rt.getTransactionID(), rt.getRefundReason(), rt.getRefundAmount());
+                } else if (t instanceof TechnicalDifficultyTicket) {
+                    TechnicalDifficultyTicket td = (TechnicalDifficultyTicket) t;
+                    out.printf("%s\t%s%n", baseData, td.getDeviceType());
+                } else if (t instanceof ChangeRequestTicket) {
+                    ChangeRequestTicket cr = (ChangeRequestTicket) t;
+                    out.printf("%s\t%s%n", baseData, cr.getMovieTicketID());
+                } else if (t instanceof ProblemTicket) {
+                    ProblemTicket pt = (ProblemTicket) t;
+                    out.printf("%s\t%s%n", baseData, pt.getSeverityLevel());
+                } else {
+                    out.printf("%s%n", baseData);
+                }
+            }
+            return true;
+        } catch (IOException e) {
+            System.err.println("Error updating tickets: " + e.getMessage());
+            return false;
+        }
     }
 }

@@ -1,0 +1,21 @@
+RF001	C101	Customer	2026-04-08T10:45:00	I need to cancel my reservation for the April 8 showing as it got cancelled.
+RF001	SS001	Support Staff	2026-04-08T11:20:00	Thank you for contacting us. I've reviewed your booking. The refund has been processed.
+RF001	C101	Customer	2026-04-08T11:35:00	Great! How long will it take to appear in my account?
+RF001	SS001	Support Staff	2026-04-08T11:50:00	It typically takes 3-5 business days for refunds to appear. Check with your bank if delayed.
+RF002	C102	Customer	2026-04-08T14:30:00	I was charged twice for the same ticket. This is the second time this happened!
+RF002	SS002	Support Staff	2026-04-08T15:00:00	We sincerely apologize. I can see the duplicate charge. Refunding the extra amount immediately.
+RF002	C102	Customer	2026-04-08T15:15:00	Thank you for the quick response. Please make sure this doesn't happen again.
+TD001	C104	Customer	2026-04-09T11:35:00	I keep getting an error message when trying to login. Password reset didn't help.
+TD001	SS001	Support Staff	2026-04-09T12:00:00	Can you please clear your browser cache and try again? Also try a different browser if possible.
+TD001	C104	Customer	2026-04-09T12:30:00	Still not working. I've tried Chrome and Firefox.
+TD001	SS001	Support Staff	2026-04-09T13:00:00	I've reset your account credentials from our end. Try logging in with temporary password sent to your email.
+TD002	C101	Customer	2026-04-09T13:55:00	The payment page won't load when I try to complete my purchase. Happens on mobile only.
+TD002	SS003	Support Staff	2026-04-09T14:30:00	There's a known issue on Android devices. We're working on a fix. Try mobile web browser instead of app.
+PR001	C101	Customer	2026-04-10T10:15:00	Just experienced a complete crash when clicking checkout. Very frustrating!
+PR001	SS001	Support Staff	2026-04-10T10:45:00	We're investigating this issue urgently. Multiple users have reported it. ETA for fix is 2 hours.
+PR001	C101	Customer	2026-04-10T15:00:00	Is this fixed yet? I want to complete my booking.
+PR001	SS001	Support Staff	2026-04-10T15:30:00	Fixed as of 15:00. Our apologies. Your previous items are still in cart ready to checkout.
+PR002	C102	Customer	2026-04-10T11:45:00	I booked two tickets but they're not showing in my account. Already waited 30 minutes.
+PR002	SS002	Support Staff	2026-04-10T12:15:00	I can see your booking in our system. Refresh your app and log out then back in. Should appear.
+RF001	SS001	Support Staff	2026-04-11T02:37:50.615496800	I see
+RF001	C101	Customer	2026-04-15T06:09:25.140838700	Test comment for verification

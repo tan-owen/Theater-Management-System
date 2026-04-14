@@ -18,12 +18,15 @@ public class main {
         Map<String, User> userMap = UserFileLoader.loadUsers();
         List<Ticket> tickets = TicketFileLoader.loadTickets();
 
-        // for (User u : userMap.values()) {
-        //     System.out.println("Loaded: " + u.getUsername() + " as " + u.getClass().getSimpleName());
-        //     System.out.println("First Name: " + u.getFirstName());
-        //     System.out.println("Last Name: " + u.getLastName());
-        // }
-        // System.out.println(userMap.get("C101").toString());
+        for (User u : userMap.values()) {
+            if(u instanceof User) {
+                System.out.println("Loaded: " + u.getUsername() + " / " + u.getPassword());
+                System.out.println("First Name: " + u.getFirstName());
+                System.out.println("Last Name: " + u.getLastName());
+                
+            }
+        }
+
         System.out.println("Total users loaded: " + userMap.size());
         
 
@@ -33,7 +36,7 @@ public class main {
         System.out.println("Welcome to Theather Management System");
         System.out.println("1. Login");
         System.out.println("2. Register");
-        System.out.println("0. Back to Main Menu");
+        System.out.println("0. Exit");
         System.out.print("Enter your choice: ");
         
         switch (input.nextLine()) {
@@ -54,7 +57,7 @@ public class main {
 
                         found = true;
                         if (u instanceof Manager) {
-                            ManagerMode.run((Manager) u, args);
+                            ManagerMode.run((Manager) u, userMap, args);
                         } else if (u instanceof Customer) {
                             CustomerMode.run((Customer) u, args);
                         } else if (u instanceof SupportStaff) {
@@ -90,9 +93,10 @@ public class main {
                 System.out.print("Please enter your gender (M/F): ");
                 input.nextLine(); // Consume newline character
                 String pronounce;
-                if(input.nextLine().equalsIgnoreCase("M")) {
+                String gender = input.nextLine(); // Store the input in a variable
+                if(gender.equalsIgnoreCase("M")) {
                     pronounce = "Mr";
-                } else if(input.nextLine().equalsIgnoreCase("F")) {
+                } else if(gender.equalsIgnoreCase("F")) {
                     pronounce = "Ms";
                 } else {
                     pronounce = "Mr/Ms";
