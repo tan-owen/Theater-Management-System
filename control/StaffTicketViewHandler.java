@@ -1,5 +1,6 @@
 package control;
 
+import doa.DiscussionFileLoader;
 import doa.TicketFileLoader;
 import entity.*;
 import java.util.ArrayList;
@@ -86,11 +87,7 @@ public class StaffTicketViewHandler {
         List<Ticket> allTickets = TicketFileLoader.loadTickets();
         List<Ticket> filteredTickets = new ArrayList<>();
 
-        if (ticketType == null) {
-            System.out.println("=== Viewing Tickets ===");
-        } else {
-            System.out.println("=== Viewing " + ticketType + "s ===");
-        }
+        System.out.println("=== Viewing " + ticketType + "s ===");
         for (Ticket t : allTickets) {
 
             if (ticketType.isEmpty() || t.getTicketType().equals(ticketType)) {
@@ -118,10 +115,9 @@ public class StaffTicketViewHandler {
             try {
                 int ticketChoice = Integer.parseInt(input.nextLine());
                 if (ticketChoice > 0 && ticketChoice <= filteredTickets.size()) {
-                    System.out.println("\nYou can only perform actions on tickets assigned to you.");
-                    System.out.println("Please go to 'View My Assigned Tickets' to manage your tickets.");
-                    System.out.println("Press [ENTER] to return...");
-                    input.nextLine();
+                    Ticket selectedTicket = filteredTickets.get(ticketChoice - 1);
+                    TicketHandler.displayTicketDetails(selectedTicket, staff);
+                    TicketHandler.addCommentToTicket(selectedTicket, staff, input);
                 } else if (ticketChoice != 0) {
                     System.out.println("Invalid ticket number. Please try again.");
                 }
@@ -173,8 +169,41 @@ public class StaffTicketViewHandler {
                     TicketHandler.addCommentToTicket(ticket, staff, input);
                 }
                 case "2" -> {
-                    // TO BE IMPLEMENTED
-                    // ASK USER TO INPUT RESOLUTION STEPS THEN UPDATE THE TICKET IN THE ticket.csv
+                    ProblemTicket pt = (ProblemTicket) ticket;
+                    ConsoleUtil.clearScreen();
+                    System.out.println("=== Provide Resolution Steps ===");
+                    System.out.println("Ticket: [" + pt.getTicketID() + "] " + pt.getTicketTitle());
+
+                    String currentSteps = pt.getResolutionSteps();
+                    if (currentSteps != null && !currentSteps.isBlank() && !currentSteps.equalsIgnoreCase("null")) {
+                        System.out.println("Current resolution steps: " + currentSteps);
+                    } else {
+                        System.out.println("No resolution steps have been provided yet.");
+                    }
+
+                    System.out.print("\nEnter resolution steps (or press ENTER to cancel): ");
+                    String resolutionInput = input.nextLine().trim();
+
+                    if (resolutionInput.isEmpty()) {
+                        System.out.println("No changes made.");
+                    } else {
+                        pt.setResolutionSteps(resolutionInput);
+
+                        boolean saved = TicketFileLoader.updateTicketInCSV(pt);
+                        if (saved) {
+                            // Log the action in interaction_log.csv
+                            String safeSteps = resolutionInput.replaceAll("\t", " ").replaceAll("[\r\n]+", " ");
+                            InteractionLog resolutionLog = new InteractionLog(
+                                    staff, "Resolution steps provided: " + safeSteps);
+                            DiscussionFileLoader.saveInteractionLogToCSV(pt.getTicketID(), resolutionLog);
+
+                            System.out.println("Resolution steps saved successfully!");
+                        } else {
+                            System.out.println("Error saving resolution steps. Please try again.");
+                        }
+                    }
+                    System.out.println("Press [ENTER] to return...");
+                    input.nextLine();
                 }
                 case "3" -> closeTicket(ticket, staff, input);
                 default -> {

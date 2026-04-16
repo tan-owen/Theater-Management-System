@@ -1,20 +1,20 @@
-RF001	Refund Request	Customer wants refund for closed showing	2026-04-08T10:30	C101	SS001	High	TXN20260405001	45.0
-RF002	Refund Request	Duplicate charge on credit card	2026-04-08T14:15	C102	SS002	Critical	TXN20260407005	50.0
-RF003	Refund Request	Seat broken cannot use	2026-04-09T09:45	C103	SS001	Medium	TXN20260409003	30.0
-TD001	Technical Issue	Cannot login to app	2026-04-09T11:20	C104	SS001	High	Desktop
-TD002	Technical Issue	Payment gateway not working	2026-04-09T13:40	C101	SS003	Critical	Mobile
-TD003	Technical Issue	Booking confirmation not sent	2026-04-09T15:30	C102	SS002	Medium	Laptop
-PR001	Issue Report	Website crashes on checkout	2026-04-10T10:00	C101	SS001	Critical	High
-PR002	Issue Report	Tickets not appearing in account	2026-04-10T11:30	C102	SS002	High	Medium
-PR003	Issue Report	Discount code not applying	2026-04-10T12:15	C103	SS003	Medium	Low
-PR004	Issue Report	Search filter not working properly	2026-04-10T14:45	C104	M001	Low	Low
-TK001	General Inquiry	How to share tickets with friends	2026-04-10T09:00	C101	UNASSIGNED	Low
-TK002	General Inquiry	What are group booking discounts	2026-04-10T13:20	C103	SS001	Low
-PR001	Issue Report		2026-04-09T23:51:19.049053900	C101	UNASSIGNED	Medium	Critical
-PR002	Issue Report		2026-04-10T16:45:07.554420	C101	UNASSIGNED	Medium	Critical
-RF004	Refund Request		2026-04-15T06:09:00.238733400	C101	UNASSIGNED	Medium	TXN123456	50.99
-RF005	Refund Request		2026-04-16T00:57:20.164499600	C109	UNASSIGNED	Medium	TX1231232132	500.0
-TD004	Technical Difficulty		2026-04-16T16:07:17.438995	C110	UNASSIGNED	Medium	Mobile Phone
-RF006	test	test	2026-04-16T23:16:49.894102	C101	UNASSIGNED	Critical	tk102323	500.0
-RF007	Test	Test123	2026-04-17T04:25:59.753885300	C111	UNASSIGNED	High	TX1231233232	3999.0
-PR007	Test	TestProblem	2026-04-17T05:38:07.916911	C111	SS003	Critical	null
+RF001	Refund Request	Customer wants refund for closed showing	2026-04-08T10:30	C101	SS001	High	OPEN	TXN20260405001	45.0
+RF002	Refund Request	Duplicate charge on credit card	2026-04-08T14:15	C102	SS002	Critical	OPEN	TXN20260407005	50.0
+RF003	Refund Request	Seat broken cannot use	2026-04-09T09:45	C103	SS001	Medium	OPEN	TXN20260409003	30.0
+TD001	Technical Issue	Cannot login to app	2026-04-09T11:20	C104	SS001	High	OPEN	Desktop
+TD002	Technical Issue	Payment gateway not working	2026-04-09T13:40	C101	SS003	Critical	OPEN	Mobile
+TD003	Technical Issue	Booking confirmation not sent	2026-04-09T15:30	C102	SS002	Medium	OPEN	Laptop
+PR001	Issue Report	Website crashes on checkout	2026-04-10T10:00	C101	SS001	Critical	OPEN	High
+PR002	Issue Report	Tickets not appearing in account	2026-04-10T11:30	C102	SS002	High	OPEN	Medium
+PR003	Issue Report	Discount code not applying	2026-04-10T12:15	C103	SS003	Medium	OPEN	Low
+PR004	Issue Report	Search filter not working properly	2026-04-10T14:45	C104	M001	Low	OPEN	Low
+TK001	General Inquiry	How to share tickets with friends	2026-04-10T09:00	C101	UNASSIGNED	Low	OPEN
+TK002	General Inquiry	What are group booking discounts	2026-04-10T13:20	C103	SS001	Low	OPEN
+PR001	Issue Report		2026-04-09T23:51:19.049053900	C101	UNASSIGNED	Medium	OPEN	Critical
+PR002	Issue Report		2026-04-10T16:45:07.554420	C101	UNASSIGNED	Medium	OPEN	Critical
+RF004	Refund Request		2026-04-15T06:09:00.238733400	C101	UNASSIGNED	Medium	OPEN	TXN123456	50.99
+RF005	Refund Request		2026-04-16T00:57:20.164499600	C109	UNASSIGNED	Medium	OPEN	TX1231232132	500.0
+TD004	Technical Difficulty		2026-04-16T16:07:17.438995	C110	UNASSIGNED	Medium	OPEN	Mobile Phone
+RF006	test	test	2026-04-16T23:16:49.894102	C101	UNASSIGNED	Critical	OPEN	tk102323	500.0
+RF007	Test	Test123	2026-04-17T04:25:59.753885300	C111	UNASSIGNED	High	OPEN	TX1231233232	3999.0
+PR007	Test	TestProblem	2026-04-17T05:38:07.916911	C111	SS003	Critical	CLOSED	Do the test wtv

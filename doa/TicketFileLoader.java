@@ -19,10 +19,11 @@ public class TicketFileLoader {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_PATH, true)))) {
             String custID = (ticket.getCustomer() != null) ? ticket.getCustomer().getUserID() : "UNASSIGNED";
             String staffID = (ticket.getSupportStaff() != null) ? ticket.getSupportStaff().getUserID() : "UNASSIGNED";
-            
-            String baseData = String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s", 
-                ticket.getTicketID(), ticket.getTicketTitle(), ticket.getTicketDescription(), 
-                ticket.getCreationTime().toString(), custID, staffID, ticket.getPriorityLevel());
+            String ticketStatus = (ticket.getStatus() != null) ? ticket.getStatus() : "OPEN";
+
+            String baseData = String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s",
+                ticket.getTicketID(), ticket.getTicketTitle(), ticket.getTicketDescription(),
+                ticket.getCreationTime().toString(), custID, staffID, ticket.getPriorityLevel(), ticketStatus);
 
             if (ticket instanceof RefundTicket rt) {
                 out.printf("%s\t%s\t%s%n", baseData, rt.getTransactionID(), rt.getRefundAmount());
@@ -61,7 +62,7 @@ public class TicketFileLoader {
                 while ((line = reader.readLine()) != null) {
                     String[] data = line.split("\\t", -1);
                     
-                    if (data.length < 7) continue; 
+                    if (data.length < 8) continue;
 
                     // Parse Base Ticket Data
                     String id = data[0];
@@ -71,8 +72,9 @@ public class TicketFileLoader {
                     String custID = data[4];
                     String staffID = data[5];
                     String priorityLevel = data[6];
+                    String status = data[7]; // NEW: persisted status column
 
-                    Customer customer = null; 
+                    Customer customer = null;
                     if (allUsers.containsKey(custID) && allUsers.get(custID) instanceof Customer) {
                         customer = (Customer) allUsers.get(custID);
                     }
@@ -83,51 +85,58 @@ public class TicketFileLoader {
                     }
 
                     // Switch based on the ID Prefix to build the correct Subclass
+                    // NOTE: type-specific fields now start at index 8 (status occupies index 7)
                     String prefix = id.substring(0, 2).toUpperCase();
-                    
+                    Ticket created = null;
+
                     switch (prefix) {
                         case "RF" -> {
-                            // Refund - handle both old format (with reason) and new format (without)
-                            if (data.length >= 9) {
-                                String transID = data[7];
+                            // Refund - data[8]=transID, data[9]=amount (data[10] was old 'reason' field)
+                            if (data.length >= 10) {
+                                String transID = data[8];
                                 double amount;
-                                if (data.length >= 10) {
-                                    // Old format: data[8] is reason, data[9] is amount
-                                    amount = Double.parseDouble(data[9]);
+                                if (data.length >= 11) {
+                                    // Even older format: data[9] is reason, data[10] is amount
+                                    amount = Double.parseDouble(data[10]);
                                 } else {
-                                    // New format: data[8] is amount
-                                    amount = Double.parseDouble(data[8]);
+                                    // Standard format: data[9] is amount
+                                    amount = Double.parseDouble(data[9]);
                                 }
-                                tickets.add(new RefundTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, transID, amount));
+                                created = new RefundTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, transID, amount);
                             }
                         }
 
                         case "TD" -> {
-                            // Technical Difficulty
-                            if (data.length >= 8) {
-                                String deviceType = data[7];
-                                tickets.add(new TechnicalDifficultyTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, deviceType));
+                            // Technical Difficulty - data[8]=deviceType
+                            if (data.length >= 9) {
+                                String deviceType = data[8];
+                                created = new TechnicalDifficultyTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, deviceType);
                             }
                         }
 
                         case "CR" -> {
-                            // Change Request
+                            // Change Request - data[8]=movieTicketID
                             if (data.length >= 9) {
-                                String movieTicketID = data[7];
-                                tickets.add(new ChangeRequestTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, movieTicketID));
+                                String movieTicketID = data[8];
+                                created = new ChangeRequestTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, movieTicketID);
                             }
                         }
 
                         case "PR" -> {
-                            // Problem
-                            if (data.length >= 8) {
-                                String resolutionSteps = data[7];
-                                tickets.add(new ProblemTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, resolutionSteps));
+                            // Problem - data[8]=resolutionSteps
+                            if (data.length >= 9) {
+                                String resolutionSteps = data[8];
+                                created = new ProblemTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, resolutionSteps);
                             }
                         }
-                            
+
                         default -> // Generic base ticket
-                            tickets.add(new Ticket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null));
+                            created = new Ticket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null);
+                    }
+
+                    if (created != null) {
+                        created.setStatus(status);
+                        tickets.add(created);
                     }
                 }
             } catch (IOException e) {
@@ -160,8 +169,9 @@ public class TicketFileLoader {
             for (Ticket t : tickets) {
                 String custID = (t.getCustomer() != null) ? t.getCustomer().getUserID() : "UNASSIGNED";
                 String staffID = (t.getSupportStaff() != null) ? t.getSupportStaff().getUserID() : "UNASSIGNED";
-                String baseData = String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s", 
-                    t.getTicketID(), t.getTicketTitle(), t.getTicketDescription(), t.getCreationTime().toString(), custID, staffID, t.getPriorityLevel());
+                String tStatus = (t.getStatus() != null) ? t.getStatus() : "OPEN";
+                String baseData = String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s",
+                    t.getTicketID(), t.getTicketTitle(), t.getTicketDescription(), t.getCreationTime().toString(), custID, staffID, t.getPriorityLevel(), tStatus);
 
                 if (t instanceof RefundTicket rt) {
                     out.printf("%s\t%s\t%s%n", baseData, rt.getTransactionID(), rt.getRefundAmount());

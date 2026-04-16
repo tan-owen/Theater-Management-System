@@ -28,12 +28,13 @@ public class TicketHandler {
 
         // Display user-specific information
         if (user instanceof SupportStaff) {
-            String customerName = ticket.getCustomer() != null ? 
-                ticket.getCustomer().getFirstName() + " " + ticket.getCustomer().getLastName() : "Unknown";
+            String customerName = ticket.getCustomer() != null
+                    ? ticket.getCustomer().getFirstName() + " " + ticket.getCustomer().getLastName()
+                    : "Unknown";
             System.out.println("Customer: " + customerName);
         } else if (user instanceof Manager) {
-            System.out.println("Staff: " + (ticket.getSupportStaff() != null ? 
-                ticket.getSupportStaff().getUsername() : "Unassigned"));
+            System.out.println("Staff: "
+                    + (ticket.getSupportStaff() != null ? ticket.getSupportStaff().getUsername() : "Unassigned"));
         }
 
         // Display ticket type-specific information
@@ -92,8 +93,6 @@ public class TicketHandler {
         ticket.setInteractionLog(closeLog);
         boolean success = TicketFileLoader.updateTicketInCSV(ticket);
         if (success) {
-            DiscussionFileLoader.saveInteractionLogToCSV(ticket.getTicketID(), closeLog);
-            ticket.addComment(user, "Ticket closed by " + userType + ".");
             return true;
         }
         return false;
