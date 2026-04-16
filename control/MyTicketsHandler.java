@@ -69,7 +69,7 @@ public class MyTicketsHandler {
             System.out.println("Refund Amount: RM" + String.format("%.2f", rt.getRefundAmount()));
         } else if (selectedTicket instanceof ProblemTicket) {
             ProblemTicket pt = (ProblemTicket) selectedTicket;
-            System.out.println("Severity Level: " + pt.getSeverityLevel());
+            System.out.println("Severity Level: " + pt.getResolutionSteps());
         } else if (selectedTicket instanceof ChangeRequestTicket) {
             ChangeRequestTicket cr = (ChangeRequestTicket) selectedTicket;
             System.out.println("Movie Ticket ID: " + cr.getMovieTicketID());

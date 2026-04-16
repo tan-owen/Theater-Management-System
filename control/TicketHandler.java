@@ -59,7 +59,7 @@ public class TicketHandler {
             System.out.println("Transaction ID: " + rt.getTransactionID());
             System.out.println("Refund Amount: RM" + String.format("%.2f", rt.getRefundAmount()));
         } else if (ticket instanceof ProblemTicket pt) {
-            System.out.println("Severity Level: " + pt.getSeverityLevel());
+            System.out.println("Severity Level: " + pt.getResolutionSteps());
         } else if (ticket instanceof ChangeRequestTicket cr) {
             System.out.println("Movie Ticket ID: " + cr.getMovieTicketID());
         } else if (ticket instanceof TechnicalDifficultyTicket td) {

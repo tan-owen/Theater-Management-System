@@ -31,7 +31,7 @@ public class TicketFileLoader {
             } else if (ticket instanceof ChangeRequestTicket cr) {
                 out.printf("%s\t%s%n", baseData, cr.getMovieTicketID());
             } else if (ticket instanceof ProblemTicket pt) {
-                out.printf("%s\t%s%n", baseData, pt.getSeverityLevel());
+                out.printf("%s\t%s%n", baseData, pt.getResolutionSteps());
             } else {
                 out.printf("%s%n", baseData);
             }
@@ -121,8 +121,8 @@ public class TicketFileLoader {
                         case "PR" -> {
                             // Problem
                             if (data.length >= 8) {
-                                String severity = data[7];
-                                tickets.add(new ProblemTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, severity));
+                                String resolutionSteps = data[7];
+                                tickets.add(new ProblemTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, resolutionSteps));
                             }
                         }
                             
@@ -170,7 +170,7 @@ public class TicketFileLoader {
                 } else if (t instanceof ChangeRequestTicket cr) {
                     out.printf("%s\t%s%n", baseData, cr.getMovieTicketID());
                 } else if (t instanceof ProblemTicket pt) {
-                    out.printf("%s\t%s%n", baseData, pt.getSeverityLevel());
+                    out.printf("%s\t%s%n", baseData, pt.getResolutionSteps());
                 } else {
                     out.printf("%s%n", baseData);
                 }

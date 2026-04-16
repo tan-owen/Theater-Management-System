@@ -32,11 +32,10 @@ public class StaffTicketViewHandler {
             System.out.println("=====================");
             for (int i = 0; i < assignedTickets.size(); i++) {
                 Ticket t = assignedTickets.get(i);
-                System.out.printf("%d. [%s] %s - %s (%s)%n", 
-                    i + 1, t.getTicketID(), t.getTicketTitle(), t.getTicketType(), t.getStatus() != null ? t.getStatus() : "Open");
+                System.out.printf("%d. [%s] %s - %s (%s)%n",
+                        i + 1, t.getTicketID(), t.getTicketTitle(), t.getTicketType(),
+                        t.getStatus() != null ? t.getStatus() : "Open");
             }
-
-
 
             System.out.println("\nEnter ticket number to view details (0 to go back): ");
             try {
@@ -65,7 +64,7 @@ public class StaffTicketViewHandler {
         System.out.println("0. Exit");
         System.out.print("Enter your choice: ");
         String typeChoice = input.nextLine();
-        
+
         String ticketType;
         switch (typeChoice) {
             case "1" -> ticketType = "";
@@ -94,7 +93,6 @@ public class StaffTicketViewHandler {
         }
         for (Ticket t : allTickets) {
 
-
             if (ticketType.isEmpty() || t.getTicketType().equals(ticketType)) {
                 filteredTickets.add(t);
             }
@@ -109,9 +107,11 @@ public class StaffTicketViewHandler {
             System.out.println("==================");
             for (int i = 0; i < filteredTickets.size(); i++) {
                 Ticket t = filteredTickets.get(i);
-                String customerName = t.getCustomer() != null ? t.getCustomer().getFirstName() + " " + t.getCustomer().getLastName() : "Unknown";
-                System.out.printf("%d. [%s] %s - %s (%s)%n", 
-                    i + 1, t.getTicketID(), t.getTicketTitle(), customerName, t.getTicketType());
+                String customerName = t.getCustomer() != null
+                        ? t.getCustomer().getFirstName() + " " + t.getCustomer().getLastName()
+                        : "Unknown";
+                System.out.printf("%d. [%s] %s - %s (%s)%n",
+                        i + 1, t.getTicketID(), t.getTicketTitle(), customerName, t.getTicketType());
             }
 
             System.out.println("\nEnter ticket number to view details (0 to go back): ");
@@ -131,9 +131,6 @@ public class StaffTicketViewHandler {
         }
     }
 
-
-
-
     private static void closeTicket(Ticket ticket, SupportStaff staff, Scanner input) {
         ConsoleUtil.clearScreen();
         System.out.println("=== Close Ticket ===");
@@ -141,7 +138,7 @@ public class StaffTicketViewHandler {
         System.out.println("1. Yes, close this ticket");
         System.out.println("2. No, cancel");
         System.out.print("Enter your choice: ");
-        
+
         String choice = input.nextLine();
         if (choice.equals("1")) {
             boolean success = TicketHandler.closeTicket(ticket, staff);
@@ -158,29 +155,60 @@ public class StaffTicketViewHandler {
     }
 
     private static void selectTicketAction(Ticket ticket, SupportStaff staff, Scanner input) {
-        System.out.println("\n=== Staff Actions ===");
-        System.out.println("1. Discussion Thread");
-        System.out.println("2. Close Ticket");
-        System.out.println("0. Back to Ticket List");
-        System.out.print("Enter your choice: ");
+        if (ticket instanceof ProblemTicket) {
+            System.out.println("\n=== Staff Actions ===");
+            System.out.println("1. Discussion Thread");
+            System.out.println("2. Provide Resolution Steps");
+            System.out.println("3. Close Ticket");
+            System.out.println("0. Back to Ticket List");
+            System.out.print("Enter your choice: ");
 
-        String choice = input.nextLine();
-        switch (choice) {
-            case "0" -> {
-                return;
+            String choice = input.nextLine();
+            switch (choice) {
+                case "0" -> {
+                    return;
+                }
+                case "1" -> {
+                    TicketHandler.displayTicketDetails(ticket, staff);
+                    TicketHandler.addCommentToTicket(ticket, staff, input);
+                }
+                case "2" -> {
+                    // TO BE IMPLEMENTED
+                    // ASK USER TO INPUT RESOLUTION STEPS THEN UPDATE THE TICKET IN THE ticket.csv
+                }
+                case "3" -> closeTicket(ticket, staff, input);
+                default -> {
+                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Press [ENTER] to return...");
+                    input.nextLine();
+                }
             }
-            case "1" -> {
-                TicketHandler.displayTicketDetails(ticket, staff);
-                TicketHandler.addCommentToTicket(ticket, staff, input);
+        } else {
+            System.out.println("\n=== Staff Actions ===");
+            System.out.println("1. Discussion Thread");
+            System.out.println("2. Close Ticket");
+            System.out.println("0. Back to Ticket List");
+            System.out.print("Enter your choice: ");
+
+            String choice = input.nextLine();
+            switch (choice) {
+                case "0" -> {
+                    return;
+                }
+                case "1" -> {
+                    TicketHandler.displayTicketDetails(ticket, staff);
+                    TicketHandler.addCommentToTicket(ticket, staff, input);
+                }
+                case "2" -> closeTicket(ticket, staff, input);
+                default -> {
+                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Press [ENTER] to return...");
+                    input.nextLine();
+                }
             }
-            case "2" -> closeTicket(ticket, staff, input);
-            default -> {
-                System.out.println("Invalid choice. Please try again.");
-                System.out.println("Press [ENTER] to return...");
-                input.nextLine();
-            }
+
         }
-    }
 
+    }
 
 }

@@ -97,22 +97,12 @@ public class TicketSubmissionHandler {
     }
 
     private static void submitProblemTicket(Customer customer, Scanner input, String title, String description, String priorityLevel) {
-        System.out.println("Select severity level:");
-        System.out.println("1. Low\n2. Medium\n3. High\n4. Critical");
-        System.out.print("Enter your choice: ");
-        String severityChoice = input.nextLine();
-        String severityLevel;
-        severityLevel = switch (severityChoice) {
-            case "1" -> "Low";
-            case "3" -> "High";
-            case "4" -> "Critical";
-            default -> "Medium";
-        };
+        String resolutionSteps = "UNDETERMINED";
         
         String problemId = generateTicketID("PR");
         ProblemTicket problemTicket = new ProblemTicket(
             problemId, title, description, LocalDateTime.now(), customer, null, priorityLevel, 
-            new InteractionLog(customer, "Created problem ticket - Title: " + title + ", Priority: " + priorityLevel + ", Severity: " + severityLevel), null, severityLevel
+            new InteractionLog(customer, "Created problem ticket - Title: " + title + ", Priority: " + priorityLevel + ", Resolution: " + resolutionSteps), null, resolutionSteps
         );
         TicketFileLoader.saveTicketToCSV(problemTicket);
         DiscussionFileLoader.saveInteractionLogToCSV(problemId, problemTicket.getInteractionLog());
