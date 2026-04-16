@@ -23,7 +23,7 @@ public class ManagerMode {
             System.out.println("2. View Staff Performance");
             System.out.println("3. Generate Monthly performance report");
             System.out.println("4. View all tickets");
-            System.out.println("5. View my interaction history");
+            System.out.println("5. View staff interaction history");
             System.out.println("0. Logout");
             System.out.print("Enter your choice: ");
             
@@ -43,7 +43,7 @@ public class ManagerMode {
                     ManagerTicketViewHandler.viewAllTickets(manager, input);
                     break;
                 case "5":
-                    InteractionHistoryHandler.viewInteractionHistory(manager, input);
+                    StaffInteractionHistoryHandler.viewStaffInteractionHistory(input);
                     break;
                 case "0":
                     System.out.println("Logging out...");

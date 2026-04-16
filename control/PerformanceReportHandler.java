@@ -40,7 +40,7 @@ public class PerformanceReportHandler {
                 for (Ticket t : tickets) {
                     if (t.getSupportStaff() != null && t.getSupportStaff().getUsername().equals(staffUsername)) {
                         assigned++;
-                        if (t.getStatus() != null && t.getStatus().equals("Resolved")) {
+                        if ("CLOSED".equals(t.getStatus())) {
                             resolved++;
                         }
                     }
@@ -66,7 +66,7 @@ public class PerformanceReportHandler {
         int openTickets = 0;
 
         for (Ticket t : tickets) {
-            if (t.getStatus() != null && t.getStatus().equals("Resolved")) {
+            if ("CLOSED".equals(t.getStatus())) {
                 resolvedTickets++;
             } else {
                 openTickets++;
