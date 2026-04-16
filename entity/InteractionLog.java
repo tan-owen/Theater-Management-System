@@ -39,4 +39,11 @@ public class InteractionLog {
     public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
     public void setUser(User user) { this.user = user; }
     public void setActionDetail(String actionDetail) { this.actionDetail = actionDetail; }
+
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return String.format("InteractionLog [User: %s, Action: %s, Timestamp: %s]",
+            user.getUsername(), actionDetail, timestamp.format(formatter));
+    }
 }

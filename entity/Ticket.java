@@ -90,4 +90,10 @@ public class Ticket implements Discussable {
         
         return discussion.toString();
     }
+
+    @Override
+    public String toString() {
+        return String.format("Ticket [ID: %s, Title: %s, Status: %s, Priority: %s, Type: %s, Created: %s]",
+            ticketID, ticketTitle, status, priorityLevel, getTicketType(), creationTime);
+    }
 }

@@ -23,4 +23,10 @@ public class ChangeRequestTicket extends Ticket {
     public String getTicketType() {
         return "Change Request Ticket";
     }
+
+    @Override
+    public String toString() {
+        return String.format("ChangeRequestTicket [ID: %s, Title: %s, MovieTicketID: %s, Status: %s, Priority: %s]",
+            getTicketID(), getTicketTitle(), movieTicketID, getStatus(), getPriorityLevel());
+    }
 }

@@ -1,56 +1,16 @@
-package utility;
+package control;
 
-import boundary.*;
-import doa.TicketFileLoader;
-import doa.UserFileLoader;
+import boundary.CustomerMode;
+import boundary.ManagerMode;
+import boundary.SupportStaffMode;
+import doa.*;
 import entity.*;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import utility.ConsoleUtil;
 
-
-public class AppLauncher {
-
-    public static void startApplication(String[] args) {
-    
-        ConsoleUtil.clearScreen();
-
-        boolean running = true;
-        while (running) {
-            // Reload user data each loop iteration in case new users were registered
-            Scanner input = new Scanner(System.in);
-            Map<String, User> userMap = UserFileLoader.loadUsers();
-            List<Ticket> tickets = TicketFileLoader.loadTickets();
-
-            ConsoleUtil.clearScreen();
-            System.out.println("Welcome to Theater Management System");
-            System.out.println("1. Login");
-            System.out.println("2. Register");
-            System.out.println("0. Exit");
-            System.out.print("Enter your choice: ");
-            
-            String choice = input.nextLine();
-            
-            switch (choice) {
-                case "1":
-                    handleLogin(input, userMap, args);
-                    break;
-                case "2":
-                    handleRegistration(input, userMap, args);
-                    break;
-                case "0":
-                    System.out.println("Exiting...");
-                    running = false;
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    input.nextLine();
-                    break;
-            }
-        }
-    }
-
-    private static void handleLogin(Scanner input, Map<String, User> userMap, String[] args) {
+public class LoginRegistrationHandler {
+    public static void handleLogin(Scanner input, Map<String, User> userMap, String[] args) {
         ConsoleUtil.clearScreen();
         System.out.println("--- Login ---");
         System.out.print("Please enter your username: ");
@@ -73,12 +33,12 @@ public class AppLauncher {
             input.nextLine();
 
             // Send user to their mode based on class type
-            if (foundUser instanceof Manager) {
-                ManagerMode.run((Manager) foundUser, userMap, args);
-            } else if (foundUser instanceof Customer) {
-                CustomerMode.run((Customer) foundUser, args);
-            } else if (foundUser instanceof SupportStaff) {
-                SupportStaffMode.run((SupportStaff) foundUser, args);
+            if (foundUser instanceof Manager manager) {
+                ManagerMode.run(manager, userMap, args);
+            } else if (foundUser instanceof Customer customer) {
+                CustomerMode.run(customer, args);
+            } else if (foundUser instanceof SupportStaff supportStaff) {
+                SupportStaffMode.run(supportStaff, args);
             }
         } else {
             ConsoleUtil.clearScreen();
@@ -88,7 +48,7 @@ public class AppLauncher {
         }
     }
 
-    private static void handleRegistration(Scanner input, Map<String, User> userMap, String[] args) {
+    public static void handleRegistration(Scanner input, Map<String, User> userMap, String[] args) {
         ConsoleUtil.clearScreen();
         System.out.println("--- Register ---");
         

@@ -30,17 +30,13 @@ public class TicketFileLoader {
                         ticket.getTicketID(), ticket.getTicketTitle(), ticket.getTicketDescription(), 
                         ticket.getCreationTime().toString(), custID, staffID, ticket.getPriorityLevel());
 
-                    if (ticket instanceof RefundTicket) {
-                        RefundTicket rt = (RefundTicket) ticket;
+                    if (ticket instanceof RefundTicket rt) {
                         out.printf("%s\t%s\t%s\t%s%n", baseData, rt.getTransactionID(), rt.getRefundReason(), rt.getRefundAmount());
-                    } else if (ticket instanceof TechnicalDifficultyTicket) {
-                        TechnicalDifficultyTicket td = (TechnicalDifficultyTicket) ticket;
+                    } else if (ticket instanceof TechnicalDifficultyTicket td) {
                         out.printf("%s\t%s%n", baseData, td.getDeviceType());
-                    } else if (ticket instanceof ChangeRequestTicket) {
-                        ChangeRequestTicket cr = (ChangeRequestTicket) ticket;
+                    } else if (ticket instanceof ChangeRequestTicket cr) {
                         out.printf("%s\t%s%n", baseData, cr.getMovieTicketID());
-                    } else if (ticket instanceof ProblemTicket) {
-                        ProblemTicket pt = (ProblemTicket) ticket;
+                    } else if (ticket instanceof ProblemTicket pt) {
                         out.printf("%s\t%s%n", baseData, pt.getSeverityLevel());
                     } else {
                         out.printf("%s%n", baseData);
@@ -99,40 +95,42 @@ public class TicketFileLoader {
                     String prefix = id.substring(0, 2).toUpperCase();
                     
                     switch (prefix) {
-                        case "RF": // Refund
+                        case "RF" -> {
+                            // Refund
                             if (data.length >= 10) {
                                 String transID = data[7];
                                 String reason = data[8];
                                 double amount = Double.parseDouble(data[9]);
                                 tickets.add(new RefundTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, transID, reason, amount));
                             }
-                            break;
+                        }
 
-                        case "TD": // Technical Difficulty
+                        case "TD" -> {
+                            // Technical Difficulty
                             if (data.length >= 8) {
                                 String deviceType = data[7];
                                 tickets.add(new TechnicalDifficultyTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, deviceType));
                             }
-                            break;
+                        }
 
-                        case "CR": // Change Request
+                        case "CR" -> {
+                            // Change Request
                             if (data.length >= 9) {
                                 String movieTicketID = data[7];
                                 tickets.add(new ChangeRequestTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, movieTicketID));
                             }
-                            break;
+                        }
 
-                        case "PR": // Problem
+                        case "PR" -> {
+                            // Problem
                             if (data.length >= 8) {
                                 String severity = data[7];
                                 tickets.add(new ProblemTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, severity));
                             }
-                            break;
+                        }
                             
-                        default:
-                            // Generic base ticket
+                        default -> // Generic base ticket
                             tickets.add(new Ticket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null));
-                            break;
                     }
                 }
             } catch (IOException e) {
@@ -170,17 +168,13 @@ public class TicketFileLoader {
                         String baseData = String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s", 
                             t.getTicketID(), t.getTicketTitle(), t.getTicketDescription(), t.getCreationTime().toString(), custID, staffID, t.getPriorityLevel());
 
-                        if (t instanceof RefundTicket) {
-                            RefundTicket rt = (RefundTicket) t;
+                        if (t instanceof RefundTicket rt) {
                             out.printf("%s\t%s\t%s\t%s%n", baseData, rt.getTransactionID(), rt.getRefundReason(), rt.getRefundAmount());
-                        } else if (t instanceof TechnicalDifficultyTicket) {
-                            TechnicalDifficultyTicket td = (TechnicalDifficultyTicket) t;
+                        } else if (t instanceof TechnicalDifficultyTicket td) {
                             out.printf("%s\t%s%n", baseData, td.getDeviceType());
-                        } else if (t instanceof ChangeRequestTicket) {
-                            ChangeRequestTicket cr = (ChangeRequestTicket) t;
+                        } else if (t instanceof ChangeRequestTicket cr) {
                             out.printf("%s\t%s%n", baseData, cr.getMovieTicketID());
-                        } else if (t instanceof ProblemTicket) {
-                            ProblemTicket pt = (ProblemTicket) t;
+                        } else if (t instanceof ProblemTicket pt) {
                             out.printf("%s\t%s%n", baseData, pt.getSeverityLevel());
                         } else {
                             out.printf("%s%n", baseData);

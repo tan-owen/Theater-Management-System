@@ -37,24 +37,12 @@ public class TicketSubmissionHandler {
         String description = "";
         
         switch (choice) { 
-            case "1":
-                submitRefundTicket(customer, input, description);
-                break;
-            case "2":
-                submitProblemTicket(customer, input, description);
-                break;
-            case "3":
-                submitChangeRequestTicket(customer, input, description);
-                break;
-            case "4":
-                submitTechnicalDifficultyTicket(customer, input, description);
-                break;
-            case "5":
-                submitGeneralTicket(customer, description);
-                break;
-            default:
-                System.out.println("Invalid ticket type selected.");
-                break;
+            case "1" -> submitRefundTicket(customer, input, description);
+            case "2" -> submitProblemTicket(customer, input, description);
+            case "3" -> submitChangeRequestTicket(customer, input, description);
+            case "4" -> submitTechnicalDifficultyTicket(customer, input, description);
+            case "5" -> submitGeneralTicket(customer, description);
+            default -> System.out.println("Invalid ticket type selected.");
         }
         
         System.out.println("Press [ENTER] to return to main menu...");
@@ -67,7 +55,7 @@ public class TicketSubmissionHandler {
         System.out.println("Enter the reason for the refund: ");
         String refundReason = input.nextLine();
         System.out.println("Enter the refund amount: ");
-        double refundAmount = 0;
+        double refundAmount;
         try {
             refundAmount = Double.parseDouble(input.nextLine());
             if (refundAmount <= 0) {
@@ -94,12 +82,12 @@ public class TicketSubmissionHandler {
         System.out.print("Enter your choice: ");
         String severityChoice = input.nextLine();
         String severityLevel;
-        switch (severityChoice) {
-            case "1": severityLevel = "Low"; break;
-            case "3": severityLevel = "High"; break;
-            case "4": severityLevel = "Critical"; break;
-            default: severityLevel = "Medium"; break;
-        }
+        severityLevel = switch (severityChoice) {
+            case "1" -> "Low";
+            case "3" -> "High";
+            case "4" -> "Critical";
+            default -> "Medium";
+        };
         
         String problemId = generateTicketID("PR");
         ProblemTicket problemTicket = new ProblemTicket(
@@ -113,8 +101,6 @@ public class TicketSubmissionHandler {
     private static void submitChangeRequestTicket(Customer customer, Scanner input, String description) {
         System.out.println("Enter the movie ticket ID for the change request: ");
         String movieTicketID = input.nextLine();
-        System.out.println("Enter the new seat ID you want to change to: ");
-        String newSeatID = input.nextLine();
         
         String changeId = generateTicketID("CR");
         ChangeRequestTicket changeTicket = new ChangeRequestTicket(
@@ -131,13 +117,13 @@ public class TicketSubmissionHandler {
         System.out.print("Enter your choice: ");
         String deviceChoice = input.nextLine();
         String deviceType;
-        switch (deviceChoice) {
-            case "1": deviceType = "Desktop Computer"; break;
-            case "2": deviceType = "Laptop"; break;
-            case "3": deviceType = "Mobile Phone"; break;
-            case "4": deviceType = "Tablet"; break;
-            default: deviceType = "Other"; break;
-        }
+        deviceType = switch (deviceChoice) {
+            case "1" -> "Desktop Computer";
+            case "2" -> "Laptop";
+            case "3" -> "Mobile Phone";
+            case "4" -> "Tablet";
+            default -> "Other";
+        };
         
         String techId = generateTicketID("TD");
         TechnicalDifficultyTicket techTicket = new TechnicalDifficultyTicket(

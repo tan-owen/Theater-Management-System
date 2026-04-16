@@ -19,4 +19,10 @@ public class OtherTicket extends Ticket {
     public String getTicketType() {
         return "Other Ticket";
     }
+
+    @Override
+    public String toString() {
+        return String.format("OtherTicket [ID: %s, Title: %s, Status: %s, Priority: %s]",
+            getTicketID(), getTicketTitle(), getStatus(), getPriorityLevel());
+    }
 }

@@ -26,4 +26,10 @@ public class TechnicalDifficultyTicket extends Ticket {
     public String getTicketType() {
         return "Incident Ticket";
     }
+
+    @Override
+    public String toString() {
+        return String.format("TechnicalDifficultyTicket [ID: %s, Title: %s, Device: %s, Status: %s, Priority: %s]",
+            getTicketID(), getTicketTitle(), deviceType, getStatus(), getPriorityLevel());
+    }
 }

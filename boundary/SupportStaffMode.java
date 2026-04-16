@@ -26,23 +26,17 @@ public class SupportStaffMode {
             String menuChoice = input.nextLine();
 
             switch (menuChoice) {
-                case "1":
-                    StaffTicketViewHandler.viewAssignedTickets(staff, input);
-                    break;
-                case "2":
-                    StaffTicketViewHandler.viewAllTickets(staff, input);
-                    break;
-                case "3":
-                    StaffInteractionHistoryHandler.viewInteractionHistory(staff, input);
-                    break;
-                case "0":
+                case "1" -> StaffTicketViewHandler.viewAssignedTickets(staff, input);
+                case "2" -> StaffTicketViewHandler.viewAllTickets(staff, input);
+                case "3" -> StaffInteractionHistoryHandler.viewInteractionHistory(staff, input);
+                case "0" -> {
                     System.out.println("Logging out...");
                     keepRunning = false;
-                    break;
-                default:
+                }
+                default -> {
                     System.out.println("Invalid choice. Please try again.");
                     input.nextLine();
-                    break;
+                }
             }
         }
     }

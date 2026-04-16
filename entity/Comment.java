@@ -35,16 +35,12 @@ public class Comment {
 
     private static String getUserTypeFromClass(User user) {
         String className = user.getClass().getSimpleName();
-        switch (className) {
-            case "Manager":
-                return "Manager";
-            case "SupportStaff":
-                return "Support Staff";
-            case "Customer":
-                return "Customer";
-            default:
-                return "User";
-        }
+        return switch (className) {
+            case "Manager" -> "Manager";
+            case "SupportStaff" -> "Support Staff";
+            case "Customer" -> "Customer";
+            default -> "User";
+        };
     }
 
     public String getFormattedComment() {
@@ -66,4 +62,11 @@ public class Comment {
     public void setContent(String content) { this.content = content; }
     public void setUserType(String userType) { this.userType = userType; }
     public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
+
+    @Override
+    public String toString() {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return String.format("Comment [Author: %s (%s), Content: %s, Timestamp: %s]",
+            author.getUsername(), userType, content, timestamp.format(fmt));
+    }
 }

@@ -43,7 +43,7 @@ public class StaffTicketViewHandler {
                 int ticketChoice = Integer.parseInt(input.nextLine());
                 if (ticketChoice > 0 && ticketChoice <= assignedTickets.size()) {
                     Ticket selectedTicket = assignedTickets.get(ticketChoice - 1);
-                    viewTicketDetails(selectedTicket, staff, input);
+                    selectTicketAction(selectedTicket, staff, input);
                 } else if (ticketChoice != 0) {
                     System.out.println("Invalid ticket number. Please try again.");
                 }
@@ -66,26 +66,35 @@ public class StaffTicketViewHandler {
         System.out.print("Enter your choice: ");
         String typeChoice = input.nextLine();
         
-        String ticketType = "";
+        String ticketType;
         switch (typeChoice) {
-            case "1": ticketType = ""; break;
-            case "2": ticketType = "RefundTicket"; break;
-            case "3": ticketType = "TechnicalDifficultyTicket"; break;
-            case "4": ticketType = "ChangeRequestTicket"; break;
-            case "5": ticketType = "ProblemTicket"; break;
-            case "6": ticketType = "OtherTicket"; break;
-            case "0": return;
-            default:
+            case "1" -> ticketType = "";
+            case "2" -> ticketType = "Refund Ticket";
+            case "3" -> ticketType = "Technical Difficulty Ticket";
+            case "4" -> ticketType = "Change Request Ticket";
+            case "5" -> ticketType = "Problem Ticket";
+            case "6" -> ticketType = "Other Ticket";
+            case "0" -> {
+                return;
+            }
+            default -> {
                 System.out.println("Invalid choice. Please try again.");
                 return;
+            }
         }
 
         ConsoleUtil.clearScreen();
-        System.out.println("=== Viewing Tickets ===");
         List<Ticket> allTickets = TicketFileLoader.loadTickets();
         List<Ticket> filteredTickets = new ArrayList<>();
 
         for (Ticket t : allTickets) {
+            if (ticketType == null) {
+                System.out.println("=== Viewing Tickets ===");
+            } else {
+                System.out.println("=== Viewing " + ticketType + "s ===");
+            }
+
+
             if (ticketType.isEmpty() || t.getTicketType().equals(ticketType)) {
                 filteredTickets.add(t);
             }
@@ -110,7 +119,7 @@ public class StaffTicketViewHandler {
                 int ticketChoice = Integer.parseInt(input.nextLine());
                 if (ticketChoice > 0 && ticketChoice <= filteredTickets.size()) {
                     Ticket selectedTicket = filteredTickets.get(ticketChoice - 1);
-                    viewTicketDetails(selectedTicket, staff, input);
+                    selectTicketAction(selectedTicket, staff, input);
                 } else if (ticketChoice != 0) {
                     System.out.println("Invalid ticket number. Please try again.");
                 }
@@ -122,76 +131,50 @@ public class StaffTicketViewHandler {
 
 
 
-    private static void selectTicketAction(Ticket ticket, SupportStaff staff, Scanner input){
-        System.out.println("Select Action:");
-        System.out.println("1. Dicussion Thread");
-        System.out.println("2. Close Ticket");
+
+    private static void closeTicket(Ticket ticket, SupportStaff staff, Scanner input) {
+        ConsoleUtil.clearScreen();
+        System.out.println("=== Close Ticket ===");
+        System.out.println("Are you sure you want to close ticket: " + ticket.getTicketID() + "?");
+        System.out.println("1. Yes, close this ticket");
+        System.out.println("2. No, cancel");
         System.out.print("Enter your choice: ");
         
+        String choice = input.nextLine();
+        if (choice.equals("1")) {
+            boolean success = TicketHandler.closeTicket(ticket, staff);
+            if (success) {
+                System.out.println("Ticket closed successfully!");
+            } else {
+                System.out.println("Error closing ticket. Please try again.");
+            }
+        } else {
+            System.out.println("Ticket closing cancelled.");
+        }
+        System.out.println("Press [ENTER] to return...");
+        input.nextLine();
+    }
 
-        switch (input.nextLine()) {
-            case "1":
-                viewTicketDetails(ticket, staff, input);
-                break;
-            case "2":
-                System.out.println("Close ticket functionality is not implemented yet.");
-                System.out.println("Press [ENTER] to return...");
-                input.nextLine();
-                break;
-            default:
+    private static void selectTicketAction(Ticket ticket, SupportStaff staff, Scanner input) {
+        System.out.println("\n=== Staff Actions ===");
+        System.out.println("1. Discussion Thread");
+        System.out.println("2. Close Ticket");
+        System.out.print("Enter your choice: ");
+
+        String choice = input.nextLine();
+        switch (choice) {
+            case "1" -> {
+                TicketHandler.displayTicketDetails(ticket, staff);
+                TicketHandler.addCommentToTicket(ticket, staff, input);
+            }
+            case "2" -> closeTicket(ticket, staff, input);
+            default -> {
                 System.out.println("Invalid choice. Please try again.");
                 System.out.println("Press [ENTER] to return...");
                 input.nextLine();
-                break;
-        }
-    }
-
-    private static void viewTicketDetails(Ticket ticket, SupportStaff staff, Scanner input) {
-
-        ConsoleUtil.clearScreen();
-        System.out.println("Ticket Details:");
-        System.out.println("===============");
-        System.out.println("ID: " + ticket.getTicketID());
-        System.out.println("Title: " + ticket.getTicketTitle());
-        System.out.println("Type: " + ticket.getTicketType());
-        System.out.println("Description: " + ticket.getTicketDescription());
-        System.out.println("Status: " + (ticket.getStatus() != null ? ticket.getStatus() : "Open"));
-        System.out.println("Priority: " + ticket.getPriorityLevel());
-        System.out.println("Created: " + ticket.getCreationTime());
-        String customerName = ticket.getCustomer() != null ? ticket.getCustomer().getFirstName() + " " + ticket.getCustomer().getLastName() : "Unknown";
-        System.out.println("Customer: " + customerName);
-
-        if (ticket instanceof RefundTicket) {
-            RefundTicket rt = (RefundTicket) ticket;
-            System.out.println("Transaction ID: " + rt.getTransactionID());
-            System.out.println("Refund Reason: " + rt.getRefundReason());
-            System.out.println("Refund Amount: $" + rt.getRefundAmount());
-        } else if (ticket instanceof ProblemTicket) {
-            ProblemTicket pt = (ProblemTicket) ticket;
-            System.out.println("Severity Level: " + pt.getSeverityLevel());
-        } else if (ticket instanceof ChangeRequestTicket) {
-            ChangeRequestTicket cr = (ChangeRequestTicket) ticket;
-            System.out.println("Movie Ticket ID: " + cr.getMovieTicketID());
-        } else if (ticket instanceof TechnicalDifficultyTicket) {
-            TechnicalDifficultyTicket td = (TechnicalDifficultyTicket) ticket;
-            System.out.println("Device Type: " + td.getDeviceType());
-        }
-
-        System.out.println("\nDiscussion Thread:");
-        System.out.println("==================");
-        if (ticket.getDiscussionThread() != null && !ticket.getDiscussionThread().isEmpty()) {
-            for (Comment comment : ticket.getDiscussionThread()) {
-                System.out.println(comment.getFormattedComment());
             }
-        } else {
-            System.out.println("No comments yet.");
-        }
-
-        System.out.println("\nAdd a comment (or press ENTER to skip): ");
-        String commentText = input.nextLine();
-        if (!commentText.trim().isEmpty()) {
-            ticket.addComment(staff, commentText);
-            System.out.println("Comment added successfully.");
         }
     }
+
+
 }

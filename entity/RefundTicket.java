@@ -36,4 +36,10 @@ public class RefundTicket extends Ticket {
     public String getTicketType() {
         return "Refund Ticket";
     }
+
+    @Override
+    public String toString() {
+        return String.format("RefundTicket [ID: %s, Title: %s, Amount: $%.2f, Reason: %s, Status: %s]",
+            getTicketID(), getTicketTitle(), refundAmount, refundReason, getStatus());
+    }
 }

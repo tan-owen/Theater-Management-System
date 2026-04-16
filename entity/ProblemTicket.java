@@ -26,4 +26,10 @@ public class ProblemTicket extends Ticket {
     public String getTicketType() {
         return "Problem Ticket";
     }
+
+    @Override
+    public String toString() {
+        return String.format("ProblemTicket [ID: %s, Title: %s, Severity: %s, Status: %s, Priority: %s]",
+            getTicketID(), getTicketTitle(), severityLevel, getStatus(), getPriorityLevel());
+    }
 }

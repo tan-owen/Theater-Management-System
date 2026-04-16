@@ -20,3 +20,9 @@ PR003	2026-04-10T12:15:00	C103	Reported discount code application failure
 PR003	2026-04-10T13:00:00	SS003	Asked for specific discount code and timing
 TK001	2026-04-10T09:00:00	C101	Asked about sharing tickets with friends
 TK002	2026-04-10T13:20:00	C103	Inquired about group booking discounts
+TD002	2026-04-16T15:29:43.445142300	SS003	Comment: 1
+TD002	2026-04-16T15:29:46.720630500	SS003	Comment: 1
+TD002	2026-04-16T15:44:25.766694800	SS003	Comment: testing123
+TD002	2026-04-16T15:44:36.640132200	SS003	Comment: testing345
+TD002	2026-04-16T15:47:55.970433300	SS003	Comment: hi
+RF003	2026-04-16T15:48:13.419951600	SS003	Comment: test
