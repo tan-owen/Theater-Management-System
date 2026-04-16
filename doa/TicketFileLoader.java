@@ -25,7 +25,7 @@ public class TicketFileLoader {
                 ticket.getCreationTime().toString(), custID, staffID, ticket.getPriorityLevel());
 
             if (ticket instanceof RefundTicket rt) {
-                out.printf("%s\t%s\t%s\t%s%n", baseData, rt.getTransactionID(), rt.getRefundReason(), rt.getRefundAmount());
+                out.printf("%s\t%s\t%s%n", baseData, rt.getTransactionID(), rt.getRefundAmount());
             } else if (ticket instanceof TechnicalDifficultyTicket td) {
                 out.printf("%s\t%s%n", baseData, td.getDeviceType());
             } else if (ticket instanceof ChangeRequestTicket cr) {
@@ -87,12 +87,18 @@ public class TicketFileLoader {
                     
                     switch (prefix) {
                         case "RF" -> {
-                            // Refund
-                            if (data.length >= 10) {
+                            // Refund - handle both old format (with reason) and new format (without)
+                            if (data.length >= 9) {
                                 String transID = data[7];
-                                String reason = data[8];
-                                double amount = Double.parseDouble(data[9]);
-                                tickets.add(new RefundTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, transID, reason, amount));
+                                double amount;
+                                if (data.length >= 10) {
+                                    // Old format: data[8] is reason, data[9] is amount
+                                    amount = Double.parseDouble(data[9]);
+                                } else {
+                                    // New format: data[8] is amount
+                                    amount = Double.parseDouble(data[8]);
+                                }
+                                tickets.add(new RefundTicket(id, title, desc, creationTime, customer, staff, priorityLevel, null, null, transID, amount));
                             }
                         }
 
@@ -158,7 +164,7 @@ public class TicketFileLoader {
                     t.getTicketID(), t.getTicketTitle(), t.getTicketDescription(), t.getCreationTime().toString(), custID, staffID, t.getPriorityLevel());
 
                 if (t instanceof RefundTicket rt) {
-                    out.printf("%s\t%s\t%s\t%s%n", baseData, rt.getTransactionID(), rt.getRefundReason(), rt.getRefundAmount());
+                    out.printf("%s\t%s\t%s%n", baseData, rt.getTransactionID(), rt.getRefundAmount());
                 } else if (t instanceof TechnicalDifficultyTicket td) {
                     out.printf("%s\t%s%n", baseData, td.getDeviceType());
                 } else if (t instanceof ChangeRequestTicket cr) {

@@ -12,16 +12,12 @@ public class DiscussionFileLoader {
 
     private static String getUserType(User user) {
         String className = user.getClass().getSimpleName();
-        switch (className) {
-            case "Manager":
-                return "Manager";
-            case "SupportStaff":
-                return "Support Staff";
-            case "Customer":
-                return "Customer";
-            default:
-                return "User";
-        }
+        return switch (className) {
+            case "Manager" -> "Manager";
+            case "SupportStaff" -> "Support Staff";
+            case "Customer" -> "Customer";
+            default -> "User";
+        };
     }
 
     public static void saveCommentToCSV(String ticketID, User author, String message) {
@@ -43,6 +39,20 @@ public class DiscussionFileLoader {
             }
         } catch (IOException e) {
             System.err.println("Error saving comment: " + e.getMessage());
+        }
+    }
+
+    public static void saveInteractionLogToCSV(String ticketID, InteractionLog log) {
+        if (log == null || log.getUser() == null) {
+            return;
+        }
+        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(INTERACTION_FILE_PATH, true)))) {
+            String safeActionDetail = log.getActionDetail().replaceAll("\\t", " ").replaceAll("[\\r\\n]+", " ");
+            out.printf("%s\t%s\t%s\t%s%n", 
+                ticketID, log.getTimestamp().toString(), log.getUser().getUserID(), safeActionDetail);
+            out.flush();
+        } catch (IOException e) {
+            System.err.println("Error saving interaction log: " + e.getMessage());
         }
     }
 
@@ -75,7 +85,7 @@ public class DiscussionFileLoader {
                 }
 
                 // Get the user
-                User author = null;
+                User author;
                 if (allUsers.containsKey(userID)) {
                     author = allUsers.get(userID);
                 } else {

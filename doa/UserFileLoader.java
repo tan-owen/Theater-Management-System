@@ -35,8 +35,7 @@ public class UserFileLoader {
 
     private static void saveToHashedFile(User user, String hashedPassword) {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(HASHED_FILE_PATH, true)))) {
-            if (user instanceof Customer) {
-                Customer c = (Customer) user;
+            if (user instanceof Customer c) {
                 out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s%n", 
                     user.getUserID(), user.getUsername(), hashedPassword, user.getFirstName(), 
                     user.getLastName(), user.getPronounce(),  

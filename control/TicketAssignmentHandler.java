@@ -1,5 +1,6 @@
 package control;
 
+import doa.DiscussionFileLoader;
 import doa.TicketFileLoader;
 import entity.*;
 import java.util.ArrayList;
@@ -70,6 +71,7 @@ public class TicketAssignmentHandler {
                         
                         boolean ok = TicketFileLoader.updateTicketInCSV(selectedTicket);
                         if (ok) {
+                            DiscussionFileLoader.saveInteractionLogToCSV(selectedTicket.getTicketID(), assignmentLog);
                             System.out.println("Assignment recorded for ticket: " + selectedTicket.getTicketID());
                             System.out.println("Assigned to: " + staffUsername);
                             System.out.println("Reason: " + assignmentComment);

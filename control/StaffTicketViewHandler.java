@@ -87,12 +87,12 @@ public class StaffTicketViewHandler {
         List<Ticket> allTickets = TicketFileLoader.loadTickets();
         List<Ticket> filteredTickets = new ArrayList<>();
 
+        if (ticketType == null) {
+            System.out.println("=== Viewing Tickets ===");
+        } else {
+            System.out.println("=== Viewing " + ticketType + "s ===");
+        }
         for (Ticket t : allTickets) {
-            if (ticketType == null) {
-                System.out.println("=== Viewing Tickets ===");
-            } else {
-                System.out.println("=== Viewing " + ticketType + "s ===");
-            }
 
 
             if (ticketType.isEmpty() || t.getTicketType().equals(ticketType)) {
@@ -118,8 +118,10 @@ public class StaffTicketViewHandler {
             try {
                 int ticketChoice = Integer.parseInt(input.nextLine());
                 if (ticketChoice > 0 && ticketChoice <= filteredTickets.size()) {
-                    Ticket selectedTicket = filteredTickets.get(ticketChoice - 1);
-                    selectTicketAction(selectedTicket, staff, input);
+                    System.out.println("\nYou can only perform actions on tickets assigned to you.");
+                    System.out.println("Please go to 'View My Assigned Tickets' to manage your tickets.");
+                    System.out.println("Press [ENTER] to return...");
+                    input.nextLine();
                 } else if (ticketChoice != 0) {
                     System.out.println("Invalid ticket number. Please try again.");
                 }
@@ -159,10 +161,14 @@ public class StaffTicketViewHandler {
         System.out.println("\n=== Staff Actions ===");
         System.out.println("1. Discussion Thread");
         System.out.println("2. Close Ticket");
+        System.out.println("0. Back to Ticket List");
         System.out.print("Enter your choice: ");
 
         String choice = input.nextLine();
         switch (choice) {
+            case "0" -> {
+                return;
+            }
             case "1" -> {
                 TicketHandler.displayTicketDetails(ticket, staff);
                 TicketHandler.addCommentToTicket(ticket, staff, input);

@@ -60,6 +60,18 @@ public class Ticket implements Discussable {
     public void setDiscussionThread(List<Comment> discussionThread) { 
         this.discussionThread = discussionThread; 
     }
+    
+    /**
+     * Update priority level and log the change
+     */
+    public void setPriorityLevelWithLog(String newPriorityLevel, User user) {
+        String oldPriority = this.priorityLevel;
+        this.priorityLevel = newPriorityLevel;
+        // Update InteractionLog with priority change
+        if (user != null) {
+            this.interactionLog = new InteractionLog(user, "Priority changed from " + oldPriority + " to " + newPriorityLevel);
+        }
+    }
 
     public String getTicketType(){
         return this.getClass().getSimpleName();
@@ -69,6 +81,10 @@ public class Ticket implements Discussable {
     public void addComment(User author, String message) {
         Comment newComment = new Comment(author, message);
         this.discussionThread.add(newComment);
+        // Update InteractionLog with comment
+        if (this.interactionLog != null) {
+            this.interactionLog = new InteractionLog(author, "Comment added: " + message);
+        }
         // Save the comment to CSV for persistence
         doa.DiscussionFileLoader.saveCommentToCSV(this.ticketID, author, message);
     }

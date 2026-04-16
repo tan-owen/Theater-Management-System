@@ -1,5 +1,6 @@
 package control;
 
+import doa.DiscussionFileLoader;
 import doa.TicketFileLoader;
 import entity.*;
 import utility.ConsoleUtil;
@@ -56,8 +57,7 @@ public class TicketHandler {
     public static void displayTicketTypeDetails(Ticket ticket) {
         if (ticket instanceof RefundTicket rt) {
             System.out.println("Transaction ID: " + rt.getTransactionID());
-            System.out.println("Refund Reason: " + rt.getRefundReason());
-            System.out.println("Refund Amount: $" + rt.getRefundAmount());
+            System.out.println("Refund Amount: RM" + String.format("%.2f", rt.getRefundAmount()));
         } else if (ticket instanceof ProblemTicket pt) {
             System.out.println("Severity Level: " + pt.getSeverityLevel());
         } else if (ticket instanceof ChangeRequestTicket cr) {
@@ -86,9 +86,13 @@ public class TicketHandler {
      */
     public static boolean closeTicket(Ticket ticket, User user) {
         ticket.setStatus("CLOSED");
+        String userType = user instanceof Manager ? "manager" : "support staff";
+        // Update InteractionLog with status change
+        InteractionLog closeLog = new InteractionLog(user, "Ticket closed by " + userType + ".");
+        ticket.setInteractionLog(closeLog);
         boolean success = TicketFileLoader.updateTicketInCSV(ticket);
         if (success) {
-            String userType = user instanceof Manager ? "manager" : "support staff";
+            DiscussionFileLoader.saveInteractionLogToCSV(ticket.getTicketID(), closeLog);
             ticket.addComment(user, "Ticket closed by " + userType + ".");
             return true;
         }
@@ -96,12 +100,17 @@ public class TicketHandler {
     }
 
     /**
-     * Update ticket status to a new status
+     * Update ticket status to a new status and log the change
      */
     public static boolean updateTicketStatus(Ticket ticket, String newStatus, User user) {
+        String oldStatus = ticket.getStatus();
         ticket.setStatus(newStatus);
+        // Update InteractionLog with status change
+        InteractionLog statusLog = new InteractionLog(user, "Status changed from " + oldStatus + " to " + newStatus);
+        ticket.setInteractionLog(statusLog);
         boolean success = TicketFileLoader.updateTicketInCSV(ticket);
         if (success) {
+            DiscussionFileLoader.saveInteractionLogToCSV(ticket.getTicketID(), statusLog);
             ticket.addComment(user, "Ticket status changed to: " + newStatus);
             return true;
         }

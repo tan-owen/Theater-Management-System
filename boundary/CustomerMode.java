@@ -22,10 +22,7 @@ public class CustomerMode {
             System.out.println("3. Ticket Discussion"); 
             System.out.println("0. Logout");
             System.out.print("Enter your choice: ");
-            
-            String menuChoice = input.nextLine();
-
-            switch (menuChoice) {
+            switch (input.nextLine()) {
                 case "1":
                     TicketSubmissionHandler.submitNewTicket(customer, input);
                     break;

@@ -40,15 +40,12 @@ public class DiscussionHandler {
                 if (ticketChoice > 0 && ticketChoice <= openTickets.size()) {
                     Ticket selectedTicket = openTickets.get(ticketChoice - 1);
                     joinDiscussion(selectedTicket, customer, input);
-                } else if (ticketChoice != 0) {
-                    System.out.println("Invalid ticket number. Please try again.");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid ticket number.");
-            }
+                    System.out.println("Press [ENTER] to return to main menu...");
+                    input.nextLine();
+                } 
+            } catch (NumberFormatException e) {}
         }
-        System.out.println("Press [ENTER] to return to main menu...");
-        input.nextLine();
+        
     }
 
     private static void joinDiscussion(Ticket selectedTicket, Customer customer, Scanner input) {

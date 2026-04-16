@@ -1,5 +1,6 @@
 package control;
 
+import doa.DiscussionFileLoader;
 import doa.TicketFileLoader;
 import entity.*;
 import java.time.LocalDateTime;
@@ -22,23 +23,7 @@ public class TicketSubmissionHandler {
 
     public static void submitNewTicket(Customer customer, Scanner input) {
         ConsoleUtil.clearScreen();
-        
-        // Ask for ticket title and description first
-        System.out.println("=== Create New Ticket ===");
-        System.out.print("Enter ticket title: ");
-        String title = input.nextLine();
-        if (title.trim().isEmpty()) {
-            System.out.println("Error: Title cannot be empty.");
-            return;
-        }
-        
-        System.out.print("Enter ticket description: ");
-        String description = input.nextLine();
-        if (description.trim().isEmpty()) {
-            System.out.println("Error: Description cannot be empty.");
-            return;
-        }
-        
+
         System.out.println("\nWhat type of issue is this?");
         System.out.println("1. I want a refund");
         System.out.println("2. I'm facing an issue");
@@ -50,48 +35,68 @@ public class TicketSubmissionHandler {
         String choice = input.nextLine();
 
         if (choice.equals("0")) return;
+        
+        
+        System.out.println("=== Create New Ticket ===");
+        System.out.println("Enter ticket title: ");
+        String title = input.nextLine();
+        if (title.trim().isEmpty()) {
+            System.out.println("Error: Title cannot be empty.");
+            return;
+        }
+        
+        System.out.println("Enter ticket description: ");
+        String description = input.nextLine();
+        if (description.trim().isEmpty()) {
+            System.out.println("Error: Description cannot be empty.");
+            return;
+        }
+        
+        System.out.println("Priority Level");
+        System.out.println("1. Low\n2. Medium\n3. High\n4. Critical");
+        System.out.print("Enter your choice: ");
+        String priorityChoice = input.nextLine();
+        String priorityLevel;
+        priorityLevel = switch (priorityChoice) {
+            case "1" -> "Low";
+            case "3" -> "High";
+            case "4" -> "Critical";
+            default -> "Medium";
+        };
 
         switch (choice) { 
-            case "1" -> submitRefundTicket(customer, input, title, description);
-            case "2" -> submitProblemTicket(customer, input, title, description);
-            case "3" -> submitChangeRequestTicket(customer, input, title, description);
-            case "4" -> submitTechnicalDifficultyTicket(customer, input, title, description);
-            case "5" -> submitGeneralTicket(customer, title, description);
+            case "1" -> submitRefundTicket(customer, input, title, description, priorityLevel);
+            case "2" -> submitProblemTicket(customer, input, title, description, priorityLevel);
+            case "3" -> submitChangeRequestTicket(customer, input, title, description, priorityLevel);
+            case "4" -> submitTechnicalDifficultyTicket(customer, input, title, description, priorityLevel);
+            case "5" -> submitGeneralTicket(customer, title, description, priorityLevel);
             default -> System.out.println("Invalid ticket type selected.");
         }
         
+        
+
         System.out.println("Press [ENTER] to return to main menu...");
         input.nextLine();
     }
 
-    private static void submitRefundTicket(Customer customer, Scanner input, String title, String description) {
-        System.out.println("Enter the purchase transaction ID for the refund: ");
+    private static void submitRefundTicket(Customer customer, Scanner input, String title, String description, String priorityLevel) {
+        System.out.print("Enter the purchase transaction ID for the refund: ");
         String transactionID = input.nextLine();
-        System.out.println("Enter the reason for the refund: ");
-        String refundReason = input.nextLine();
-        System.out.println("Enter the refund amount: ");
-        double refundAmount;
-        try {
-            refundAmount = Double.parseDouble(input.nextLine());
-            if (refundAmount <= 0) {
-                System.out.println("Error: Refund amount must be greater than 0.");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Error: Invalid amount. Please enter a valid number.");
-            return;
-        }
-        
+        System.out.print("Enter the refund amount: ");
+        double refundAmount = input.nextDouble();
+        input.nextLine(); // Consume the newline character
+
         String refundId = generateTicketID("RF");
         RefundTicket refundTicket = new RefundTicket(
-            refundId, title, description, LocalDateTime.now(), customer, null, "Medium", 
-            new InteractionLog(customer, "Created refund ticket"), null, transactionID, refundReason, refundAmount
+            refundId, title, description, LocalDateTime.now(), customer, null, priorityLevel, 
+            new InteractionLog(customer, "Created refund ticket - Title: " + title + ", Priority: " + priorityLevel + ", Transaction: " + transactionID + ", Amount: " + refundAmount), null, transactionID, refundAmount
         );
         TicketFileLoader.saveTicketToCSV(refundTicket);
+        DiscussionFileLoader.saveInteractionLogToCSV(refundId, refundTicket.getInteractionLog());
         System.out.println("Refund ticket submitted successfully! Ticket ID: " + refundId);
     }
 
-    private static void submitProblemTicket(Customer customer, Scanner input, String title, String description) {
+    private static void submitProblemTicket(Customer customer, Scanner input, String title, String description, String priorityLevel) {
         System.out.println("Select severity level:");
         System.out.println("1. Low\n2. Medium\n3. High\n4. Critical");
         System.out.print("Enter your choice: ");
@@ -106,27 +111,29 @@ public class TicketSubmissionHandler {
         
         String problemId = generateTicketID("PR");
         ProblemTicket problemTicket = new ProblemTicket(
-            problemId, title, description, LocalDateTime.now(), customer, null, "Medium", 
-            new InteractionLog(customer, "Created problem ticket"), null, severityLevel
+            problemId, title, description, LocalDateTime.now(), customer, null, priorityLevel, 
+            new InteractionLog(customer, "Created problem ticket - Title: " + title + ", Priority: " + priorityLevel + ", Severity: " + severityLevel), null, severityLevel
         );
         TicketFileLoader.saveTicketToCSV(problemTicket);
+        DiscussionFileLoader.saveInteractionLogToCSV(problemId, problemTicket.getInteractionLog());
         System.out.println("Problem ticket submitted successfully! Ticket ID: " + problemId);
     }
 
-    private static void submitChangeRequestTicket(Customer customer, Scanner input, String title, String description) {
+    private static void submitChangeRequestTicket(Customer customer, Scanner input, String title, String description, String priorityLevel) {
         System.out.println("Enter the movie ticket ID for the change request: ");
         String movieTicketID = input.nextLine();
         
         String changeId = generateTicketID("CR");
         ChangeRequestTicket changeTicket = new ChangeRequestTicket(
-            changeId, title, description, LocalDateTime.now(), customer, null, "Medium", 
-            new InteractionLog(customer, "Created change request ticket"), null, movieTicketID
+            changeId, title, description, LocalDateTime.now(), customer, null, priorityLevel, 
+            new InteractionLog(customer, "Created change request ticket - Title: " + title + ", Priority: " + priorityLevel + ", MovieTicketID: " + movieTicketID), null, movieTicketID
         );
         TicketFileLoader.saveTicketToCSV(changeTicket);
+        DiscussionFileLoader.saveInteractionLogToCSV(changeId, changeTicket.getInteractionLog());
         System.out.println("Change request ticket submitted successfully! Ticket ID: " + changeId);
     }
 
-    private static void submitTechnicalDifficultyTicket(Customer customer, Scanner input, String title, String description) {
+    private static void submitTechnicalDifficultyTicket(Customer customer, Scanner input, String title, String description, String priorityLevel) {
         System.out.println("Select device type:");
         System.out.println("1. Desktop Computer\n2. Laptop\n3. Mobile Phone\n4. Tablet\n5. Other");
         System.out.print("Enter your choice: ");
@@ -142,20 +149,22 @@ public class TicketSubmissionHandler {
         
         String techId = generateTicketID("TD");
         TechnicalDifficultyTicket techTicket = new TechnicalDifficultyTicket(
-            techId, title, description, LocalDateTime.now(), customer, null, "Medium", 
-            new InteractionLog(customer, "Created technical difficulty ticket"), null, deviceType
+            techId, title, description, LocalDateTime.now(), customer, null, priorityLevel, 
+            new InteractionLog(customer, "Created technical difficulty ticket - Title: " + title + ", Priority: " + priorityLevel + ", Device: " + deviceType), null, deviceType
         );
         TicketFileLoader.saveTicketToCSV(techTicket);
+        DiscussionFileLoader.saveInteractionLogToCSV(techId, techTicket.getInteractionLog());
         System.out.println("Technical difficulty ticket submitted successfully! Ticket ID: " + techId);
     }
 
-    private static void submitGeneralTicket(Customer customer, String title, String description) {
+    private static void submitGeneralTicket(Customer customer, String title, String description, String priorityLevel) {
         String otherId = generateTicketID("TK");
         Ticket otherTicket = new Ticket(
-            otherId, title, description, LocalDateTime.now(), customer, null, "Medium", 
-            new InteractionLog(customer, "Created general ticket"), null
+            otherId, title, description, LocalDateTime.now(), customer, null, priorityLevel, 
+            new InteractionLog(customer, "Created general ticket - Title: " + title + ", Priority: " + priorityLevel), null
         );
         TicketFileLoader.saveTicketToCSV(otherTicket);
+        DiscussionFileLoader.saveInteractionLogToCSV(otherId, otherTicket.getInteractionLog());
         System.out.println("General ticket submitted successfully! Ticket ID: " + otherId);
     }
 }

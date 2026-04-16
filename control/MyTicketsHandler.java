@@ -19,6 +19,7 @@ public class MyTicketsHandler {
         for (Ticket t : allTickets) {
             if (t.getCustomer() != null && t.getCustomer().getUserID().equals(customer.getUserID())) {
                 myTickets.add(t);
+                System.out.println("Ticket ID: " + t.getTicketID());
             }
         }
         
@@ -39,15 +40,15 @@ public class MyTicketsHandler {
                 if (ticketChoice > 0 && ticketChoice <= myTickets.size()) {
                     Ticket selectedTicket = myTickets.get(ticketChoice - 1);
                     viewTicketDetails(selectedTicket);
+                    System.out.println("Press [ENTER] to return to main menu...");
+                    input.nextLine();
                 } else if (ticketChoice != 0) {
-                    System.out.println("Invalid ticket number. Please try again.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid ticket number.");
             }
         }
-        System.out.println("Press [ENTER] to return to main menu...");
-        input.nextLine();
+        
     }
 
     private static void viewTicketDetails(Ticket selectedTicket) {
@@ -65,8 +66,7 @@ public class MyTicketsHandler {
         if (selectedTicket instanceof RefundTicket) {
             RefundTicket rt = (RefundTicket) selectedTicket;
             System.out.println("Transaction ID: " + rt.getTransactionID());
-            System.out.println("Refund Reason: " + rt.getRefundReason());
-            System.out.println("Refund Amount: $" + rt.getRefundAmount());
+            System.out.println("Refund Amount: RM" + String.format("%.2f", rt.getRefundAmount()));
         } else if (selectedTicket instanceof ProblemTicket) {
             ProblemTicket pt = (ProblemTicket) selectedTicket;
             System.out.println("Severity Level: " + pt.getSeverityLevel());
