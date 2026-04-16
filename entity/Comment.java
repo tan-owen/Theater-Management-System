@@ -10,27 +10,17 @@ public class Comment {
     private User author;
     private LocalDateTime timestamp;
     private String content;
-    private String userType;
 
     public Comment(User author, String content) {
         this.author = author;
         this.content = content;
         this.timestamp = LocalDateTime.now();
-        this.userType = getUserTypeFromClass(author);
     }
 
-    public Comment(User author, String content, String userType) {
-        this.author = author;
-        this.content = content;
-        this.timestamp = LocalDateTime.now();
-        this.userType = userType;
-    }
-
-    public Comment(User author, String content, LocalDateTime timestamp, String userType) {
+    public Comment(User author, String content, LocalDateTime timestamp) {
         this.author = author;
         this.content = content;
         this.timestamp = timestamp;
-        this.userType = userType;
     }
 
     private static String getUserTypeFromClass(User user) {
@@ -43,30 +33,31 @@ public class Comment {
         };
     }
 
+    private String getDerivedUserType() {
+        return getUserTypeFromClass(author);
+    }
+
     public String getFormattedComment() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM dd, HH:mm");
         return String.format("[%s] %s (%s): \"%s\"", 
-                timestamp.format(fmt), author.getUsername(), userType, content);
+                timestamp.format(fmt), author.getUsername(), getDerivedUserType(), content);
     }
 
     // Getters
     public User getAuthor() { return author; }
-    public User getCommenter() { return author; }
     public String getContent() { return content; }
-    public String getMessage() { return content; }
-    public String getUserType() { return userType; }
+    public String getUserType() { return getDerivedUserType(); }
     public LocalDateTime getTimestamp() { return timestamp; }
 
     // Setters
     public void setAuthor(User author) { this.author = author; }
     public void setContent(String content) { this.content = content; }
-    public void setUserType(String userType) { this.userType = userType; }
     public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
 
     @Override
     public String toString() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return String.format("Comment [Author: %s (%s), Content: %s, Timestamp: %s]",
-            author.getUsername(), userType, content, timestamp.format(fmt));
+            author.getUsername(), getDerivedUserType(), content, timestamp.format(fmt));
     }
 }

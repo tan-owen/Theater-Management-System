@@ -6,12 +6,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.locks.ReadWriteLock;
-import utility.ThreadSafeFileManager;
 
 public class TicketFileLoader {
     private static final String FILE_PATH = "data/tickets.csv";
-    private static final ReadWriteLock LOCK = ThreadSafeFileManager.getFileLock();
 
     public static void saveTicketToCSV(Ticket ticket) {
         if (isTicketIdDuplicate(ticket.getTicketID())) {
@@ -19,34 +16,29 @@ public class TicketFileLoader {
             return;
         }
 
-        ThreadSafeFileManager.performFileOperationWithRetry(() -> {
-            LOCK.writeLock().lock();
-            try {
-                try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_PATH, true)))) {
-                    String custID = (ticket.getCustomer() != null) ? ticket.getCustomer().getUserID() : "UNASSIGNED";
-                    String staffID = (ticket.getSupportStaff() != null) ? ticket.getSupportStaff().getUserID() : "UNASSIGNED";
-                    
-                    String baseData = String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s", 
-                        ticket.getTicketID(), ticket.getTicketTitle(), ticket.getTicketDescription(), 
-                        ticket.getCreationTime().toString(), custID, staffID, ticket.getPriorityLevel());
+        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_PATH, true)))) {
+            String custID = (ticket.getCustomer() != null) ? ticket.getCustomer().getUserID() : "UNASSIGNED";
+            String staffID = (ticket.getSupportStaff() != null) ? ticket.getSupportStaff().getUserID() : "UNASSIGNED";
+            
+            String baseData = String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s", 
+                ticket.getTicketID(), ticket.getTicketTitle(), ticket.getTicketDescription(), 
+                ticket.getCreationTime().toString(), custID, staffID, ticket.getPriorityLevel());
 
-                    if (ticket instanceof RefundTicket rt) {
-                        out.printf("%s\t%s\t%s\t%s%n", baseData, rt.getTransactionID(), rt.getRefundReason(), rt.getRefundAmount());
-                    } else if (ticket instanceof TechnicalDifficultyTicket td) {
-                        out.printf("%s\t%s%n", baseData, td.getDeviceType());
-                    } else if (ticket instanceof ChangeRequestTicket cr) {
-                        out.printf("%s\t%s%n", baseData, cr.getMovieTicketID());
-                    } else if (ticket instanceof ProblemTicket pt) {
-                        out.printf("%s\t%s%n", baseData, pt.getSeverityLevel());
-                    } else {
-                        out.printf("%s%n", baseData);
-                    }
-                    out.flush();
-                }
-            } finally {
-                LOCK.writeLock().unlock();
+            if (ticket instanceof RefundTicket rt) {
+                out.printf("%s\t%s\t%s\t%s%n", baseData, rt.getTransactionID(), rt.getRefundReason(), rt.getRefundAmount());
+            } else if (ticket instanceof TechnicalDifficultyTicket td) {
+                out.printf("%s\t%s%n", baseData, td.getDeviceType());
+            } else if (ticket instanceof ChangeRequestTicket cr) {
+                out.printf("%s\t%s%n", baseData, cr.getMovieTicketID());
+            } else if (ticket instanceof ProblemTicket pt) {
+                out.printf("%s\t%s%n", baseData, pt.getSeverityLevel());
+            } else {
+                out.printf("%s%n", baseData);
             }
-        }, "Save ticket to CSV");
+            out.flush();
+        } catch (IOException e) {
+            System.err.println("Error saving ticket: " + e.getMessage());
+        }
     }
 
     private static boolean isTicketIdDuplicate(String targetID) {
@@ -61,7 +53,6 @@ public class TicketFileLoader {
 
         if (!file.exists()) return tickets;
 
-        LOCK.readLock().lock();
         try {
             Map<String, User> allUsers = UserFileLoader.loadUsers();
 
@@ -137,12 +128,13 @@ public class TicketFileLoader {
                 System.err.println("Error reading Ticket CSV: " + e.getMessage());
             }
 
-            // Load discussions from CSV (thread-safe operation)
+            // Load discussions from CSV
             DiscussionFileLoader.loadDiscussionsIntoTickets(tickets);
 
             return tickets;
-        } finally {
-            LOCK.readLock().unlock();
+        } catch (Exception e) {
+            System.err.println("Error loading tickets: " + e.getMessage());
+            return tickets;
         }
     }
 
@@ -158,33 +150,30 @@ public class TicketFileLoader {
         }
         if (!found) tickets.add(ticket);
 
-        return ThreadSafeFileManager.performFileOperationWithRetry(() -> {
-            LOCK.writeLock().lock();
-            try {
-                try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_PATH, false)))) {
-                    for (Ticket t : tickets) {
-                        String custID = (t.getCustomer() != null) ? t.getCustomer().getUserID() : "UNASSIGNED";
-                        String staffID = (t.getSupportStaff() != null) ? t.getSupportStaff().getUserID() : "UNASSIGNED";
-                        String baseData = String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s", 
-                            t.getTicketID(), t.getTicketTitle(), t.getTicketDescription(), t.getCreationTime().toString(), custID, staffID, t.getPriorityLevel());
+        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE_PATH, false)))) {
+            for (Ticket t : tickets) {
+                String custID = (t.getCustomer() != null) ? t.getCustomer().getUserID() : "UNASSIGNED";
+                String staffID = (t.getSupportStaff() != null) ? t.getSupportStaff().getUserID() : "UNASSIGNED";
+                String baseData = String.format("%s\t%s\t%s\t%s\t%s\t%s\t%s", 
+                    t.getTicketID(), t.getTicketTitle(), t.getTicketDescription(), t.getCreationTime().toString(), custID, staffID, t.getPriorityLevel());
 
-                        if (t instanceof RefundTicket rt) {
-                            out.printf("%s\t%s\t%s\t%s%n", baseData, rt.getTransactionID(), rt.getRefundReason(), rt.getRefundAmount());
-                        } else if (t instanceof TechnicalDifficultyTicket td) {
-                            out.printf("%s\t%s%n", baseData, td.getDeviceType());
-                        } else if (t instanceof ChangeRequestTicket cr) {
-                            out.printf("%s\t%s%n", baseData, cr.getMovieTicketID());
-                        } else if (t instanceof ProblemTicket pt) {
-                            out.printf("%s\t%s%n", baseData, pt.getSeverityLevel());
-                        } else {
-                            out.printf("%s%n", baseData);
-                        }
-                    }
-                    out.flush();
+                if (t instanceof RefundTicket rt) {
+                    out.printf("%s\t%s\t%s\t%s%n", baseData, rt.getTransactionID(), rt.getRefundReason(), rt.getRefundAmount());
+                } else if (t instanceof TechnicalDifficultyTicket td) {
+                    out.printf("%s\t%s%n", baseData, td.getDeviceType());
+                } else if (t instanceof ChangeRequestTicket cr) {
+                    out.printf("%s\t%s%n", baseData, cr.getMovieTicketID());
+                } else if (t instanceof ProblemTicket pt) {
+                    out.printf("%s\t%s%n", baseData, pt.getSeverityLevel());
+                } else {
+                    out.printf("%s%n", baseData);
                 }
-            } finally {
-                LOCK.writeLock().unlock();
             }
-        }, "Update tickets to CSV");
+            out.flush();
+            return true;
+        } catch (IOException e) {
+            System.err.println("Error updating tickets: " + e.getMessage());
+            return false;
+        }
     }
 }

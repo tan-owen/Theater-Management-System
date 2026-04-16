@@ -5,7 +5,6 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import utility.PasswordHasher;
-import utility.ThreadSafeFileManager;
 
 public class UserFileLoader {
     private static final String HASHED_FILE_PATH = "data/accounts.csv";
@@ -35,39 +34,39 @@ public class UserFileLoader {
 
 
     private static void saveToHashedFile(User user, String hashedPassword) {
-        ThreadSafeFileManager.performFileOperationWithRetry(() -> {
-            try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(HASHED_FILE_PATH, true)))) {
-                if (user instanceof Customer) {
-                    Customer c = (Customer) user;
-                    out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s%n", 
-                        user.getUserID(), user.getUsername(), hashedPassword, user.getFirstName(), 
-                        user.getLastName(), user.getPronounce(),  
-                        c.getEmail(), c.getPhoneNum());
-                } else {
-                    out.printf("%s\t%s\t%s\t\t\t%s\t%s\t%s%n", 
-                        user.getUserID(), user.getUsername(), hashedPassword, 
-                        user.getFirstName(), user.getLastName(), user.getPronounce());
-                }
+        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(HASHED_FILE_PATH, true)))) {
+            if (user instanceof Customer) {
+                Customer c = (Customer) user;
+                out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s%n", 
+                    user.getUserID(), user.getUsername(), hashedPassword, user.getFirstName(), 
+                    user.getLastName(), user.getPronounce(),  
+                    c.getEmail(), c.getPhoneNum());
+            } else {
+                out.printf("%s\t%s\t%s\t\t\t%s\t%s\t%s%n", 
+                    user.getUserID(), user.getUsername(), hashedPassword, 
+                    user.getFirstName(), user.getLastName(), user.getPronounce());
             }
-        }, "Save user to hashed CSV");
+        } catch (IOException e) {
+            System.err.println("Error saving user to hashed file: " + e.getMessage());
+        }
     }
 
     private static void saveToUnhashedFile(User user, String plainPassword) {
-        ThreadSafeFileManager.performFileOperationWithRetry(() -> {
-            try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(UNHASHED_FILE_PATH, true)))) {
-                if (user instanceof Customer) {
-                    Customer c = (Customer) user;
-                    out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s%n", 
-                        user.getUserID(), user.getUsername(), plainPassword, 
-                        c.getEmail(), c.getPhoneNum(), user.getFirstName(), 
-                        user.getLastName(), user.getPronounce());
-                } else {
-                    out.printf("%s\t%s\t%s\t\t\t%s\t%s\t%s%n", 
-                        user.getUserID(), user.getUsername(), plainPassword, 
-                        user.getFirstName(), user.getLastName(), user.getPronounce());
-                }
+        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(UNHASHED_FILE_PATH, true)))) {
+            if (user instanceof Customer) {
+                Customer c = (Customer) user;
+                out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s%n", 
+                    user.getUserID(), user.getUsername(), plainPassword, 
+                    c.getEmail(), c.getPhoneNum(), user.getFirstName(), 
+                    user.getLastName(), user.getPronounce());
+            } else {
+                out.printf("%s\t%s\t%s\t\t\t%s\t%s\t%s%n", 
+                    user.getUserID(), user.getUsername(), plainPassword, 
+                    user.getFirstName(), user.getLastName(), user.getPronounce());
             }
-        }, "Save user to unhashed CSV");
+        } catch (IOException e) {
+            System.err.println("Error saving user to unhashed file: " + e.getMessage());
+        }
     }
 
 

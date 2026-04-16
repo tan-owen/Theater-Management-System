@@ -71,9 +71,6 @@ public class Ticket implements Discussable {
         this.discussionThread.add(newComment);
         // Save the comment to CSV for persistence
         doa.DiscussionFileLoader.saveCommentToCSV(this.ticketID, author, message);
-        // Update the ticket interaction log to reflect this comment
-        String safeMessage = message.replaceAll("\\t", " ").replaceAll("[\\r\\n]+", " ");
-        this.setInteractionLog(new InteractionLog(author, "Commented: " + safeMessage));
     }
 
     @Override

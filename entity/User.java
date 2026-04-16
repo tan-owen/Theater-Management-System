@@ -24,7 +24,6 @@ public class User {
     public String getUserID() { return userID; }
     public String getUsername() { return username; }
     public String getPasswordHash() { return passwordHash; }
-    public String getPassword() { return passwordHash; }  // For backward compatibility
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
     public String getPronounce() { return pronounce; }
@@ -33,7 +32,6 @@ public class User {
     public void setUserID(String userID) { this.userID = userID; }
     public void setUsername(String username) { this.username = username; }
     public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
-    public void setPassword(String passwordHash) { this.passwordHash = passwordHash; }  // For backward compatibility
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
     public void setPronounce(String pronounce) { this.pronounce = pronounce; }
