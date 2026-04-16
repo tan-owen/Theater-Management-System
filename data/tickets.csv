@@ -7,9 +7,10 @@ TD003	Technical Issue	Booking confirmation not sent	2026-04-09T15:30	C102	SS002	
 PR001	Issue Report	Website crashes on checkout	2026-04-10T10:00	C101	SS001	Critical	High
 PR002	Issue Report	Tickets not appearing in account	2026-04-10T11:30	C102	SS002	High	Medium
 PR003	Issue Report	Discount code not applying	2026-04-10T12:15	C103	SS003	Medium	Low
-PR004	Issue Report	Search filter not working properly	2026-04-10T14:45	C104	UNASSIGNED	Low	Low
+PR004	Issue Report	Search filter not working properly	2026-04-10T14:45	C104	M001	Low	Low
 TK001	General Inquiry	How to share tickets with friends	2026-04-10T09:00	C101	UNASSIGNED	Low
 TK002	General Inquiry	What are group booking discounts	2026-04-10T13:20	C103	SS001	Low
 PR001	Issue Report		2026-04-09T23:51:19.049053900	C101	UNASSIGNED	Medium	Critical
 PR002	Issue Report		2026-04-10T16:45:07.554420	C101	UNASSIGNED	Medium	Critical
 RF004	Refund Request		2026-04-15T06:09:00.238733400	C101	UNASSIGNED	Medium	TXN123456	Not satisfied with product	50.99
+RF005	Refund Request		2026-04-16T00:57:20.164499600	C109	UNASSIGNED	Medium	TX1231232132	Bad movie.	500.0
