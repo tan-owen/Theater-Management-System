@@ -1,33 +1,83 @@
-RF001	2026-04-08T10:30:00	C101	Created refund ticket for closed showing
-RF001	2026-04-08T11:20:00	SS001	Assigned to handle refund request
-RF001	2026-04-08T11:35:00	C101	Updated ticket with additional information
-RF002	2026-04-08T14:15:00	C102	Created refund ticket for duplicate charge
-RF002	2026-04-08T15:00:00	SS002	Reviewed and approved duplicate charge refund
-TD001	2026-04-09T11:20:00	C104	Reported login technical difficulty
-TD001	2026-04-09T12:00:00	SS001	Provided initial troubleshooting steps
-TD001	2026-04-09T13:00:00	SS001	Escalated to account reset procedure
-TD002	2026-04-09T13:40:00	C101	Reported payment gateway issue on mobile
-TD002	2026-04-09T14:30:00	SS003	Identified platform-specific issue and provided workaround
-TD003	2026-04-09T15:30:00	C102	Reported missing confirmation email
-CR001	2026-04-09T08:50:00	C103	Requested seat location change
-CR001	2026-04-09T10:00:00	SS002	Approved change request
-PR001	2026-04-10T10:00:00	C101	Reported critical checkout crash
-PR001	2026-04-10T10:45:00	SS001	Escalated as critical issue affecting multiple users
-PR001	2026-04-10T15:30:00	SS001	Confirmed issue resolved and notified customer
-PR002	2026-04-10T11:30:00	C102	Reported tickets not appearing in account
-PR002	2026-04-10T12:15:00	SS002	Provided refresh and logout procedure
-PR003	2026-04-10T12:15:00	C103	Reported discount code application failure
-PR003	2026-04-10T13:00:00	SS003	Asked for specific discount code and timing
-TK001	2026-04-10T09:00:00	C101	Asked about sharing tickets with friends
-TK002	2026-04-10T13:20:00	C103	Inquired about group booking discounts
-TD002	2026-04-16T15:29:43.445142300	SS003	Comment: 1
-TD002	2026-04-16T15:29:46.720630500	SS003	Comment: 1
-TD002	2026-04-16T15:44:25.766694800	SS003	Comment: testing123
-TD002	2026-04-16T15:44:36.640132200	SS003	Comment: testing345
-TD002	2026-04-16T15:47:55.970433300	SS003	Comment: hi
-RF003	2026-04-16T15:48:13.419951600	SS003	Comment: test
-PR007	2026-04-17T05:38:07.917911100	C111	Created problem ticket - Title: Test, Priority: Critical, Resolution: null
-PR007	2026-04-17T05:40:56.542763100	M001	Assigned to davidkim: test
-PR007	2026-04-17T06:05:08.968064800	SS003	Resolution steps provided: Do the test wtv
-RF001	2026-04-17T06:09:24.939707600	SS003	Comment: test
-PR007	2026-04-17T06:10:18.985028800	SS003	Ticket closed by support staff.
+RF001	2026-04-08T10:30:00	C101	Created refund ticket - Title: Refund Request - Cancelled Showing, Priority: High
+RF001	2026-04-08T11:00:00	SS001	Assigned to handle refund request. Booking verified and refund approved.
+RF001	2026-04-08T11:40:00	SS001	Refund processed to original payment method. Customer notified of 3-5 business day timeline.
+RF001	2026-04-08T14:00:00	M001	Reviewed RF001. Refund case closed successfully. Positive handling noted.
+RF002	2026-04-08T14:15:00	C102	Created refund ticket - Title: Duplicate Charge on Credit Card, Priority: Critical
+RF002	2026-04-08T15:00:00	SS002	Duplicate charge confirmed. Immediate refund initiated for TXN20260407005.
+RF002	2026-04-08T15:30:00	SS002	Refund fully processed. Payment team notified to investigate root cause.
+RF002	2026-04-09T10:00:00	M001	RF002 escalated to IT. Payment gateway retry bug identified and patched.
+RF003	2026-04-09T09:45:00	C103	Created refund ticket - Title: Broken Seat Refund Request, Priority: Medium
+RF003	2026-04-09T10:30:00	SS001	Full refund processed. Seat C12 flagged for urgent maintenance. Complimentary RM50 credit added to customer account.
+RF003	2026-04-09T11:15:00	SS001	Status updated to CLOSED. Customer confirmed satisfaction.
+RF004	2026-04-12T08:30:00	C104	Created refund ticket - Title: Refund - Wrong Movie Booked, Priority: Medium
+RF004	2026-04-12T09:15:00	SS002	Refund initiated for Interstellar tickets. Avatar seats secured for same date at 8 PM.
+RF004	2026-04-12T09:50:00	SS002	Booking swap completed. New confirmation sent to customer. Ticket closed.
+RF005	2026-04-14T11:20:00	C109	Created refund ticket - Title: Refund Request - Overcharged, Priority: Critical
+RF005	2026-04-14T12:00:00	SS003	Critical billing error confirmed. RM410 overcharge identified. Escalated to billing team as urgent.
+RF005	2026-04-14T13:30:00	M001	Overcharge confirmed as pricing system error. Refund of RM410 approved. Finance team processing.
+RF006	2026-04-15T14:00:00	C101	Created refund ticket - Title: Refund - Event Postponed, Priority: Medium
+RF006	2026-04-15T14:45:00	SS001	Postponement verified. Full refund processed as customer ineligible to attend July date.
+RF007	2026-04-17T04:25:00	C111	Created refund ticket - Title: Refund for Wrong Seat Tier, Priority: High
+RF007	2026-04-17T08:00:00	SS002	Seat allocation error confirmed. Partial refund for price difference being processed. Premium seat reserved for next show.
+RF008	2026-04-18T02:05:00	C112	Created refund ticket - Title: Refund for Wrong Movie, Priority: High
+TD001	2026-04-09T11:20:00	C104	Created technical difficulty ticket - Title: Cannot Login to App, Priority: High, Device: Desktop Computer
+TD001	2026-04-09T12:00:00	SS001	Initial troubleshooting provided. Cache clear and browser change recommended.
+TD001	2026-04-09T13:00:00	SS001	Account manually reset from backend. Temporary password sent to customer email.
+TD001	2026-04-09T13:20:00	SS001	Customer confirmed successful login. Ticket closed.
+TD002	2026-04-09T13:40:00	C101	Created technical difficulty ticket - Title: Payment Gateway Not Responding, Priority: Critical, Device: Mobile Phone
+TD002	2026-04-09T14:30:00	SS003	Android compatibility issue identified. Mobile browser workaround provided to customer.
+TD002	2026-04-09T15:30:00	SS003	Development team notified. Fix scheduled for deployment within 48 hours.
+TD002	2026-04-09T16:00:00	SS003	Status updated to CLOSED. Customer confirmed workaround is functional.
+TD003	2026-04-09T15:30:00	C102	Created technical difficulty ticket - Title: Booking Confirmation Email Not Received, Priority: Medium, Device: Laptop
+TD003	2026-04-09T16:15:00	SS002	Booking confirmed in system. Email delivery failure identified. Confirmation email resent manually.
+TD004	2026-04-13T10:15:00	C110	Created technical difficulty ticket - Title: App Crashes on Seat Selection, Priority: High, Device: Mobile Phone
+TD004	2026-04-13T11:00:00	SS001	Crash reproduced on Android 14 with Samsung Galaxy S23. Bug logged with engineering team.
+TD004	2026-04-13T12:00:00	SS001	Status updated to IN_PROGRESS. Customer notified that patch is in development.
+TD005	2026-04-16T18:45:00	C103	Created technical difficulty ticket - Title: QR Code Not Scanning at Entrance, Priority: Critical, Device: Mobile Phone
+TD005	2026-04-16T18:55:00	SS003	Screenshot workaround provided to customer. Issue resolved on-site.
+PR001	2026-04-10T10:00:00	C101	Created problem ticket - Title: Website Crashes on Checkout, Priority: Critical
+PR001	2026-04-10T10:45:00	SS001	Critical bug escalated to engineering. Memory overflow in checkout module identified. Fix ETA 2 hours.
+PR001	2026-04-10T15:00:00	SS001	Resolution steps provided: Engineering deployed hotfix for checkout memory overflow. Users advised to clear cache and retry.
+PR001	2026-04-10T15:15:00	SS001	Issue resolved and confirmed by customer. Ticket closed.
+PR002	2026-04-10T11:30:00	C102	Created problem ticket - Title: Purchased Tickets Not in Account, Priority: High
+PR002	2026-04-10T12:15:00	SS002	Payment confirmed. Database sync issue identified. Manual sync forced for affected booking.
+PR002	2026-04-10T13:00:00	SS002	Resolution steps provided: Forced database sync. Customer advised to log out and back in to refresh account data.
+PR002	2026-04-10T13:20:00	SS002	Customer confirmed tickets are now visible. Ticket closed.
+PR003	2026-04-10T12:15:00	C103	Created problem ticket - Title: Discount Code Not Applying, Priority: Medium
+PR003	2026-04-10T13:00:00	SS003	Bug identified - discount code field on cart page not functioning. Workaround provided via payment step entry.
+PR003	2026-04-10T14:00:00	SS003	Status updated to IN_PROGRESS. Bug report submitted to development team for fix.
+PR004	2026-04-10T14:45:00	C104	Created problem ticket - Title: Search Filter Not Working, Priority: Low
+PR004	2026-04-10T15:30:00	SS002	Bug reproduced and confirmed across all browsers. Logged with development team.
+PR004	2026-04-10T16:00:00	M001	PR004 bug confirmed. Engineering team assigned. ETA for fix is next sprint.
+PR005	2026-04-13T09:00:00	C109	Created problem ticket - Title: Profile Picture Upload Failing, Priority: Low
+PR005	2026-04-13T09:45:00	SS001	JPG validation bug reproduced and confirmed. Flagged to engineering. Customer notified.
+PR006	2026-04-14T16:30:00	C111	Created problem ticket - Title: Newsletter Unsubscribe Not Working, Priority: Low
+PR006	2026-04-14T17:15:00	SS003	Customer manually removed from all mailing lists. Unsubscribe endpoint bug submitted as bug report.
+PR006	2026-04-14T17:45:00	SS003	Resolution steps provided: User removed from mailing lists manually. Bug report submitted to fix unsubscribe endpoint for all users.
+PR006	2026-04-14T18:00:00	SS003	Status updated to IN_PROGRESS. Customer confirmed no more emails received.
+PR007	2026-04-15T09:00:00	C112	Created problem ticket - Title: Double Booking on Same Date, Priority: High
+PR007	2026-04-15T09:45:00	SS002	Double booking confirmed - race condition during high-traffic period. Duplicate voided and refund initiated.
+PR007	2026-04-15T10:30:00	SS002	Resolution steps provided: Race condition identified in seat locking mechanism. Duplicate booking BKG-20260415-002 voided. Refund initiated. Valid booking confirmed.
+PR007	2026-04-15T11:00:00	M001	Incident reviewed. Engineering team briefed on race condition. Ticket closed.
+CR001	2026-04-09T09:30:00	C103	Created change request ticket - Title: Seat Change Request - Concert April 25, Priority: Medium
+CR001	2026-04-09T10:00:00	SS002	Seat availability checked. Orchestra Center Row A Seat 5 confirmed available.
+CR001	2026-04-09T11:00:00	SS002	Seat change completed from Row C Seat 12 to Orchestra Center A5. Updated ticket emailed to customer. Ticket closed.
+CR002	2026-04-11T08:00:00	C101	Created change request ticket - Title: Reschedule Tickets to Evening Show, Priority: Low
+CR002	2026-04-11T08:45:00	SS003	Evening 7 PM slot confirmed available. No extra charge applied.
+CR002	2026-04-11T09:20:00	SS003	Tickets updated to 7 PM showing on April 16. New e-tickets sent. Ticket closed.
+CR003	2026-04-13T13:00:00	C104	Created change request ticket - Title: Change Booking Date by One Week, Priority: Medium
+CR003	2026-04-13T13:45:00	SS001	April 27 seats confirmed available for same show. Booking date change initiated.
+TK001	2026-04-10T09:00:00	C101	Created general ticket - Title: How to Share Tickets with Friends, Priority: Low
+TK001	2026-04-10T10:00:00	SS001	Ticket transfer instructions provided. Customer acknowledged.
+TK002	2026-04-10T13:20:00	C103	Created general ticket - Title: Group Booking Discount Enquiry, Priority: Low
+TK002	2026-04-10T14:00:00	SS001	Group discount tiers explained. Customer connected with corporate events coordinator. Ticket closed.
+TK003	2026-04-12T10:45:00	C102	Created general ticket - Title: Loyalty Points Balance Enquiry, Priority: Low
+TK003	2026-04-12T11:30:00	SS002	Missing points identified due to system migration gap Jan-Mar 2026. 480 points manually credited. Total balance corrected to 630 points.
+RF008	2026-04-18T02:31:34.725417100	SS003	Comment: No refund for u :D
+RF008	2026-04-18T02:34:54.035249500	C112	Comment: :(
+RF008	2026-04-18T02:49:55.243393800	C112	Ticket closed by customer (issue resolved).
+RF005	2026-04-18T03:04:48.453284	SS003	Comment: The ticket will be closed then, thanks!
+RF005	2026-04-18T03:16:34.412473300	SS003	Status changed from OPEN to CLOSED
+RF005	2026-04-18T03:16:34.425850500	SS003	Comment: Ticket status changed to: CLOSED
+RF008	2026-04-18T03:43:29.641600900	M001	Assigned to tommypark: why not
+RF001	2026-04-18T06:38:58.418796600	C112	Comment: Nice

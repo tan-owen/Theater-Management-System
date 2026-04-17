@@ -1,13 +1,16 @@
 package control;
 
 import doa.TicketFileLoader;
-import entity.*;
+import entity.Comment;
+import entity.Manager;
+import entity.Ticket;
 import java.util.List;
 import java.util.Scanner;
 import utility.ConsoleUtil;
 
 /**
- * Control handler for viewing interaction history
+ * Control handler for viewing a manager's own interaction history.
+ * Shows interaction logs and discussion comments authored by the manager.
  */
 public class InteractionHistoryHandler {
 
@@ -21,14 +24,18 @@ public class InteractionHistoryHandler {
         boolean foundInteractions = false;
 
         for (Ticket t : tickets) {
-            if (t.getInteractionLog() != null && t.getInteractionLog().getUser().getUserID().equals(manager.getUserID())) {
+            // Guard against null interaction log or null user inside it
+            if (t.getInteractionLog() != null
+                    && t.getInteractionLog().getUser() != null
+                    && t.getInteractionLog().getUser().getUserID().equals(manager.getUserID())) {
                 System.out.println(t.getInteractionLog().getFormattedLog());
                 foundInteractions = true;
             }
-            
+
             if (t.getDiscussionThread() != null) {
                 for (Comment c : t.getDiscussionThread()) {
-                    if (c.getAuthor().getUserID().equals(manager.getUserID())) {
+                    if (c.getAuthor() != null
+                            && c.getAuthor().getUserID().equals(manager.getUserID())) {
                         System.out.println("[Ticket: " + t.getTicketID() + "] " + c.getFormattedComment());
                         foundInteractions = true;
                     }

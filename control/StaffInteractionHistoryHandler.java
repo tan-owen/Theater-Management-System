@@ -2,25 +2,34 @@ package control;
 
 import doa.TicketFileLoader;
 import doa.UserFileLoader;
-import entity.*;
+import entity.Comment;
+import entity.SupportStaff;
+import entity.Ticket;
+import entity.User;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 import utility.ConsoleUtil;
 
 /**
- * Control handler for viewing staff interaction history
+ * Control handler for viewing a staff member's interaction history.
+ * Managers can select any staff member from a list; staff can view their own.
+ * Interactions are sorted chronologically (oldest first).
  */
 public class StaffInteractionHistoryHandler {
 
     /**
-     * Manager entry point: displays a numbered list of all support staff,
-     * then shows the selected staff member's interaction history.
+     * Manager entry point: displays a numbered list of all support staff, then
+     * shows the selected member's full interaction history.
      */
     public static void viewStaffInteractionHistory(Scanner input) {
         ConsoleUtil.clearScreen();
         System.out.println("=== View Staff Interaction History ===");
 
-        // Collect all support staff from accounts
+        // Collect all support staff accounts
         Map<String, User> allUsers = UserFileLoader.loadUsers();
         List<SupportStaff> staffList = new ArrayList<>();
         for (User u : allUsers.values()) {
@@ -36,7 +45,7 @@ public class StaffInteractionHistoryHandler {
             return;
         }
 
-        // Display numbered list
+        // Display numbered staff list
         System.out.println("Select a staff member to view:");
         System.out.println("==============================");
         for (int i = 0; i < staffList.size(); i++) {
@@ -49,7 +58,8 @@ public class StaffInteractionHistoryHandler {
 
         try {
             int choice = Integer.parseInt(input.nextLine().trim());
-            if (choice == 0) return;
+            if (choice == 0)
+                return;
             if (choice < 1 || choice > staffList.size()) {
                 System.out.println("Invalid choice. Please try again.");
                 System.out.println("Press [ENTER] to return...");
@@ -64,37 +74,41 @@ public class StaffInteractionHistoryHandler {
         }
     }
 
+    /**
+     * Displays a chronologically sorted interaction history for the given
+     * staff member, including interaction logs and discussion comments.
+     */
     public static void viewInteractionHistory(SupportStaff staff, Scanner input) {
         ConsoleUtil.clearScreen();
         System.out.println("=== Interaction History ===");
         List<Ticket> tickets = TicketFileLoader.loadTickets();
 
-        // List to hold interactions with their timestamps for sorting
         List<InteractionEntry> interactions = new ArrayList<>();
 
         for (Ticket t : tickets) {
-            // Collect interaction logs
-            if (t.getInteractionLog() != null && t.getInteractionLog().getUser().getUserID().equals(staff.getUserID())) {
+            // Collect interaction logs authored by this staff member
+            if (t.getInteractionLog() != null
+                    && t.getInteractionLog().getUser() != null
+                    && t.getInteractionLog().getUser().getUserID().equals(staff.getUserID())) {
                 interactions.add(new InteractionEntry(
-                    t.getInteractionLog().getTimestamp(),
-                    t.getInteractionLog().getFormattedLog()
-                ));
+                        t.getInteractionLog().getTimestamp(),
+                        t.getInteractionLog().getFormattedLog()));
             }
-            
-            // Collect comments
+
+            // Collect discussion thread comments authored by this staff member
             if (t.getDiscussionThread() != null) {
                 for (Comment c : t.getDiscussionThread()) {
-                    if (c.getAuthor().getUserID().equals(staff.getUserID())) {
+                    if (c.getAuthor() != null
+                            && c.getAuthor().getUserID().equals(staff.getUserID())) {
                         interactions.add(new InteractionEntry(
-                            c.getTimestamp(),
-                            "[Ticket: " + t.getTicketID() + "] " + c.getFormattedComment()
-                        ));
+                                c.getTimestamp(),
+                                "[Ticket: " + t.getTicketID() + "] " + c.getFormattedComment()));
                     }
                 }
             }
         }
 
-        // Sort interactions by timestamp in ascending order
+        // Sort by timestamp ascending (oldest first)
         interactions.sort(Comparator.comparing(InteractionEntry::getTimestamp));
 
         if (interactions.isEmpty()) {
@@ -109,10 +123,14 @@ public class StaffInteractionHistoryHandler {
         input.nextLine();
     }
 
+    // ── Helper ─────────────────────────────────────────────────────────────
+
     /**
-     * Simple helper class to hold interaction data with timestamp
+     * Lightweight value type to pair an interaction's timestamp with its formatted
+     * text.
      */
     private static class InteractionEntry {
+
         private final LocalDateTime timestamp;
         private final String text;
 

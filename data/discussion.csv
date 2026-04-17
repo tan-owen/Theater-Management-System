@@ -1,86 +1,112 @@
-RF001	C101	Customer	2026-04-08T10:45:00	I need to cancel my reservation for the April 8 showing as it got cancelled.
-RF001	SS001	Support Staff	2026-04-08T11:20:00	Thank you for contacting us. I've reviewed your booking. The refund has been processed.
-RF001	C101	Customer	2026-04-08T11:35:00	Great! How long will it take to appear in my account?
-RF001	SS001	Support Staff	2026-04-08T11:50:00	It typically takes 3-5 business days for refunds to appear. Check with your bank if delayed.
-RF002	C102	Customer	2026-04-08T14:30:00	I was charged twice for the same ticket. This is the second time this happened!
-RF002	SS002	Support Staff	2026-04-08T15:00:00	We sincerely apologize. I can see the duplicate charge. Refunding the extra amount immediately.
-RF002	C102	Customer	2026-04-08T15:15:00	Thank you for the quick response. Please make sure this doesn't happen again.
-TD001	C104	Customer	2026-04-09T11:35:00	I keep getting an error message when trying to login. Password reset didn't help.
-TD001	SS001	Support Staff	2026-04-09T12:00:00	Can you please clear your browser cache and try again? Also try a different browser if possible.
-TD001	C104	Customer	2026-04-09T12:30:00	Still not working. I've tried Chrome and Firefox.
-TD001	SS001	Support Staff	2026-04-09T13:00:00	I've reset your account credentials from our end. Try logging in with temporary password sent to your email.
-TD002	C101	Customer	2026-04-09T13:55:00	The payment page won't load when I try to complete my purchase. Happens on mobile only.
-TD002	SS003	Support Staff	2026-04-09T14:30:00	There's a known issue on Android devices. We're working on a fix. Try mobile web browser instead of app.
-PR001	C101	Customer	2026-04-10T10:15:00	Just experienced a complete crash when clicking checkout. Very frustrating!
-PR001	SS001	Support Staff	2026-04-10T10:45:00	We're investigating this issue urgently. Multiple users have reported it. ETA for fix is 2 hours.
-PR001	C101	Customer	2026-04-10T15:00:00	Is this fixed yet? I want to complete my booking.
-PR001	SS001	Support Staff	2026-04-10T15:30:00	Fixed as of 15:00. Our apologies. Your previous items are still in cart ready to checkout.
-PR002	C102	Customer	2026-04-10T11:45:00	I booked two tickets but they're not showing in my account. Already waited 30 minutes.
-PR002	SS002	Support Staff	2026-04-10T12:15:00	I can see your booking in our system. Refresh your app and log out then back in. Should appear.
-RF001	SS001	Support Staff	2026-04-11T02:37:50.615496800	I see
-RF001	C101	Customer	2026-04-15T06:09:25.140838700	Test comment for verification
-TD002	SS003	Support Staff	2026-04-16T02:31:16.170907500	test
-RF001	M001	Manager	2026-04-16T02:34:00.617055900	test
-RF001	C101	Customer	2026-04-08T10:30:00	I purchased tickets for the April 8 showing but the event was cancelled.
-RF001	SS001	Support Staff	2026-04-08T11:00:00	I apologize for the inconvenience. Let me look into this for you.
-RF001	C101	Customer	2026-04-08T11:25:00	Thank you for helping. I'd like a full refund please.
-RF001	SS001	Support Staff	2026-04-08T11:45:00	Your refund has been approved and processed to your original payment method.
-RF001	M001	Manager	2026-04-08T14:00:00	Refund case RF001 processed successfully. Good customer service noted.
-RF002	C102	Customer	2026-04-08T14:15:00	I was incorrectly charged twice for the same order!
-RF002	SS002	Support Staff	2026-04-08T14:50:00	This should not have happened. I sincerely apologize for the error.
-RF002	C102	Customer	2026-04-08T15:10:00	When will I receive the refund for the duplicate charge?
-RF002	SS002	Support Staff	2026-04-08T15:30:00	The refund has already been initiated. You should see it within 3-5 business days.
-RF002	M001	Manager	2026-04-09T10:00:00	Reviewed case RF002. Duplicate charge issue needs to be escalated to IT.
-TD001	C104	Customer	2026-04-09T11:20:00	I'm having trouble logging into my account.
-TD001	SS001	Support Staff	2026-04-09T11:50:00	Let me help you troubleshoot. Have you tried resetting your password?
-TD001	C104	Customer	2026-04-09T12:15:00	Yes, I reset it twice but still getting the same error message.
-TD001	SS001	Support Staff	2026-04-09T12:45:00	I've manually reset your account from our system. A new temporary password has been sent to your email.
-TD001	C104	Customer	2026-04-09T13:10:00	Great! I'm in now. Thank you for the quick support.
-TD002	C101	Customer	2026-04-09T13:40:00	Mobile payment page is crashing on my Android phone.
-TD002	SS003	Support Staff	2026-04-09T14:15:00	We've identified an issue with Android compatibility. Our dev team is working on it.
-TD002	C101	Customer	2026-04-09T14:45:00	Is there a workaround I can use in the meantime?
-TD002	SS003	Support Staff	2026-04-09T15:20:00	Yes, try using our mobile web version through your browser as a temporary workaround.
-TD002	C101	Customer	2026-04-09T16:00:00	The workaround worked! Please fix the app soon.
-CR001	C103	Customer	2026-04-09T09:30:00	I need to change my seat reservation for the concert on April 25.
-CR001	SS002	Support Staff	2026-04-09T10:00:00	I can help you change your seat. Which section would you prefer?
-CR001	C103	Customer	2026-04-09T10:45:00	I'd like to move from C12 to Orchestra seating if available.
-CR001	SS002	Support Staff	2026-04-09T11:15:00	Great! I've moved you from C12 to A5 in the Orchestra section. Confirmation sent to your email.
-PR001	C101	Customer	2026-04-10T10:00:00	The entire booking system crashed when I clicked checkout!
-PR001	SS001	Support Staff	2026-04-10T10:30:00	We're aware of this critical issue. Our engineers are working on it right now.
-PR001	C101	Customer	2026-04-10T14:45:00	Is it fixed yet? I need to complete my purchase today.
-PR001	SS001	Support Staff	2026-04-10T15:15:00	Yes, it's fixed! Your items are still in your cart. Please try again.
-PR001	C101	Customer	2026-04-10T16:30:00	Excellent! Purchase completed successfully. Thank you!
-PR002	C102	Customer	2026-04-10T11:30:00	I booked tickets but they're not appearing in my account.
-PR002	SS002	Support Staff	2026-04-10T12:00:00	Let me check on that. Can you provide your order number?
-PR002	C102	Customer	2026-04-10T12:30:00	Sure, it's ORD-2026-04-10-789456.
-PR002	SS002	Support Staff	2026-04-10T13:00:00	Found the issue. Reloading your account should display them now. Try logging out and back in.
-PR002	C102	Customer	2026-04-10T13:45:00	Perfect! They're showing now. Much appreciated!
-RF003	C105	Customer	2026-04-10T09:15:00	I want a refund. The movie was really disappointing.
-RF003	SS003	Support Staff	2026-04-10T09:45:00	We're sorry to hear that. Let me process a refund for you.
-RF003	C105	Customer	2026-04-10T10:20:00	How long does refund processing take?
-RF003	SS003	Support Staff	2026-04-10T10:50:00	Standard processing is 3-5 business days. You'll receive an email confirmation.
-RF003	M001	Manager	2026-04-10T15:00:00	Customer satisfaction note: RF003 handled well by SS003. Review product feedback.
-TD003	C106	Customer	2026-04-10T14:30:00	App keeps crashing on my iPad when loading the cinema menu.
-TD003	SS001	Support Staff	2026-04-10T15:00:00	Sorry to hear that. What version of iOS are you running?
-TD003	C106	Customer	2026-04-10T15:30:00	iOS 17.4 on iPad Air. Latest version.
-TD003	SS001	Support Staff	2026-04-10T16:00:00	There's a known issue with iOS 17.4. We've pushed a fix to the app store. Please update.
-CR002	C107	Customer	2026-04-11T08:00:00	Need to reschedule my movie tickets to a different time slot.
-CR002	SS002	Support Staff	2026-04-11T08:30:00	Let me help you find an available time slot.
-CR002	C107	Customer	2026-04-11T09:00:00	What about the evening show at 7 PM instead of 2 PM?
-CR002	SS002	Support Staff	2026-04-11T09:30:00	Perfect! I've updated your reservation to the 7 PM showing. New ticket emailed to you.
-OT001	C108	Customer	2026-04-11T10:15:00	General inquiry: Do you offer group discounts?
-OT001	SS003	Support Staff	2026-04-11T10:45:00	Yes! We offer discounts for groups of 10 or more. Contact our group sales team.
-OT001	C108	Customer	2026-04-11T11:15:00	Great! I'll reach out to them. Thanks for the information.
-PR003	C109	Customer	2026-04-11T11:30:00	Unable to update my profile information. Getting an error.
-PR003	SS001	Support Staff	2026-04-11T12:00:00	Let me check what error you're receiving. Can you duplicate the steps?
-PR003	C109	Customer	2026-04-11T12:45:00	Yes, whenever I try to save phone number changes, it says 'Invalid format'.
-PR003	SS001	Support Staff	2026-04-11T13:15:00	Found the bug! Our validation was too strict. It's fixed now. Please try again.
-PR003	C109	Customer	2026-04-11T13:50:00	Works perfectly now! Thank you for the quick fix.
-TD002	SS003	Support Staff	2026-04-16T15:29:43.445142300	1
-TD002	SS003	Support Staff	2026-04-16T15:29:46.720630500	1
-TD002	SS003	Support Staff	2026-04-16T15:44:25.766694800	testing123
-TD002	SS003	Support Staff	2026-04-16T15:44:36.640132200	testing345
-TD002	SS003	Support Staff	2026-04-16T15:47:55.970433300	hi
-RF003	SS003	Support Staff	2026-04-16T15:48:13.419951600	test
-RF001	SS003	Support Staff	2026-04-17T06:09:24.939707600	test
-PR007	SS003	Support Staff	2026-04-17T06:10:18.988516900	Ticket closed by support staff.
+RF001	C101	Customer	2026-04-08T10:45:00	I purchased tickets for the April 8 showing of The Grand Illusion but the event was cancelled without any prior notice. I would like a full refund please.
+RF001	SS001	Support Staff	2026-04-08T11:00:00	Hello John, I have reviewed your booking and confirmed that the event was indeed cancelled by the venue. I will process your full refund now.
+RF001	C101	Customer	2026-04-08T11:20:00	Thank you for the quick response. How long will it take for the refund to appear in my account?
+RF001	SS001	Support Staff	2026-04-08T11:40:00	Refunds typically take 3 to 5 business days to reflect. You will receive an email confirmation once processed. Please check with your bank if it does not appear within 7 days.
+RF001	C101	Customer	2026-04-08T12:00:00	Understood. Appreciate the help!
+RF001	M001	Manager	2026-04-08T14:00:00	Case RF001 reviewed. Refund approved and processed. Good customer handling noted for tommypark.
+RF002	C102	Customer	2026-04-08T14:30:00	I was charged twice for the exact same booking! This is completely unacceptable. The second transaction is TXN20260407005.
+RF002	SS002	Support Staff	2026-04-08T15:00:00	Hello Alex, I sincerely apologize for this error. I can see both charges in our system. I am initiating an immediate refund for the duplicate transaction.
+RF002	C102	Customer	2026-04-08T15:15:00	Thank you. Please make sure this kind of error does not happen again.
+RF002	SS002	Support Staff	2026-04-08T15:30:00	The refund has been processed. I have flagged this for our payment team to investigate. You should see it within 3 to 5 business days.
+RF002	M001	Manager	2026-04-09T10:00:00	Reviewed RF002. Duplicate charge linked to a payment gateway retry bug. Escalated to IT for a permanent fix.
+RF003	C103	Customer	2026-04-09T10:00:00	The seat in Row C Seat 12 was completely broken - the back was snapped off. I had to stand for most of the show. I want a refund.
+RF003	SS001	Support Staff	2026-04-09T10:30:00	Hello Mike, I am very sorry to hear this. That is unacceptable. I will process a full refund and flag this seat for maintenance immediately.
+RF003	C103	Customer	2026-04-09T10:50:00	I appreciate that. Any chance of some form of compensation beyond the refund for the terrible experience?
+RF003	SS001	Support Staff	2026-04-09T11:15:00	Absolutely. I have added a complimentary ticket credit worth RM50 to your account as compensation. It expires in 90 days.
+RF003	C103	Customer	2026-04-09T11:30:00	That is very generous, thank you so much! I will use it soon.
+RF004	C104	Customer	2026-04-12T08:45:00	Hi, I accidentally bought tickets for Interstellar when I meant to buy Avatar. Can I get a refund or swap?
+RF004	SS002	Support Staff	2026-04-12T09:15:00	Hello Sarah, no problem at all. I can process a refund for the Interstellar tickets. Would you also like me to check seat availability for Avatar on the same date?
+RF004	C104	Customer	2026-04-12T09:30:00	Yes please! Same time if possible, 8 PM showing.
+RF004	SS002	Support Staff	2026-04-12T09:50:00	Great news. I have secured you two seats for the Avatar 8 PM showing and initiated the refund for Interstellar. New booking confirmation has been sent to your email.
+RF004	C104	Customer	2026-04-12T10:05:00	Perfect! You are amazing, thank you!
+RF005	C109	Customer	2026-04-14T11:30:00	I just got charged RM500 for what should have been a RM90 ticket. This is a massive error! What happened?
+RF005	SS003	Support Staff	2026-04-14T12:00:00	Hello Jason, I am very sorry about this. I can see the erroneous charge. This appears to be a pricing system error. I am escalating this immediately.
+RF005	C109	Customer	2026-04-14T12:20:00	Please sort this out urgently. RM500 is a lot of money. I need this reversed today.
+RF005	SS003	Support Staff	2026-04-14T13:00:00	I completely understand. I have escalated this to our billing team as urgent. You will receive a callback within 2 hours. The overcharge will be fully reversed.
+RF005	M001	Manager	2026-04-14T13:30:00	Critical billing error confirmed on RF005. Refund of RM410 approved and being processed by finance team. Customer to be notified.
+RF006	C101	Customer	2026-04-15T14:15:00	The theater sent an email saying my booked event has been postponed by 3 months to July. I cannot attend in July. Can I get a refund?
+RF006	SS001	Support Staff	2026-04-15T14:45:00	Hello John, completely understandable. Since the postponement is significant, you are eligible for a full refund. I will process it now.
+RF006	C101	Customer	2026-04-15T15:00:00	Thank you. Appreciate the flexibility.
+RF007	C111	Customer	2026-04-17T04:35:00	I paid RM3999 for a Premium seat but when I arrived, I was seated in the Standard section. I want a refund of the price difference.
+RF007	SS002	Support Staff	2026-04-17T08:00:00	Hello Bob, I apologize for this mix-up. Can you please provide your seat assignment details so I can verify what happened?
+RF007	C111	Customer	2026-04-17T08:15:00	I was assigned Seat G7 in the Standard zone but my ticket clearly shows Premium Row A.
+RF007	SS002	Support Staff	2026-04-17T09:00:00	I have confirmed the error in our seat allocation system. I will process a partial refund for the price difference and ensure your Premium seat is reserved for the next show.
+RF008	C112	Customer	2026-04-18T02:10:00	Hi, I bought the wrong movie ticket by mistake. Can I get a refund for it?
+TD001	C104	Customer	2026-04-09T11:35:00	I keep getting an error message saying invalid credentials when trying to login. I have reset my password twice but nothing works.
+TD001	SS001	Support Staff	2026-04-09T12:00:00	Hello Sarah, let me help you troubleshoot. Please try clearing your browser cache and cookies first, then attempt to login again.
+TD001	C104	Customer	2026-04-09T12:30:00	I tried that on both Chrome and Firefox. Still getting the same error.
+TD001	SS001	Support Staff	2026-04-09T13:00:00	Understood. I have manually reset your account from our backend. A temporary password has been sent to your registered email. Please use that to login and then change it.
+TD001	C104	Customer	2026-04-09T13:20:00	That worked! I am logged in now. Thank you for sorting that out!
+TD002	C101	Customer	2026-04-09T13:55:00	The payment page just spins forever and never loads. This only happens on my mobile phone. I cannot complete my purchase.
+TD002	SS003	Support Staff	2026-04-09T14:30:00	Hello John, we have identified a compatibility issue affecting some Android devices. As a workaround, please try opening our website in your mobile browser instead of the app.
+TD002	C101	Customer	2026-04-09T14:50:00	The browser workaround worked! But please fix the app - this should not be happening.
+TD002	SS003	Support Staff	2026-04-09T15:30:00	Completely agree. Our development team has been notified and a fix is being tested. Expected release is within 48 hours. Thank you for your patience.
+TD002	C101	Customer	2026-04-09T16:00:00	Okay, thank you. Please push the update quickly.
+TD003	C102	Customer	2026-04-09T15:45:00	I completed my booking 3 hours ago but I have not received any confirmation email with my tickets. My payment has gone through.
+TD003	SS002	Support Staff	2026-04-09T16:15:00	Hello Alex, I can confirm your booking was successful in our system. There seems to have been an email delivery issue. I am resending your confirmation email now.
+TD003	C102	Customer	2026-04-09T16:30:00	Received it! Thank you for the quick fix.
+TD004	C110	Customer	2026-04-13T10:30:00	The app crashes every single time I try to pick a seat from the seat map. It goes back to the home screen immediately.
+TD004	SS001	Support Staff	2026-04-13T11:00:00	Hello Daniel, sorry about this. What is your device model and operating system version? This will help us pinpoint the issue.
+TD004	C110	Customer	2026-04-13T11:20:00	I am using a Samsung Galaxy S23 running Android 14.
+TD004	SS001	Support Staff	2026-04-13T12:00:00	Thank you. We have reproduced the crash on Android 14 - it is related to a recent update. Our team is working on a patch. I will notify you when it is available.
+TD005	C103	Customer	2026-04-16T18:50:00	I am standing at the theater entrance right now and the scanner cannot read my QR code. Please help urgently!
+TD005	SS003	Support Staff	2026-04-16T18:55:00	Hello Mike, please try taking a screenshot of the QR code and showing that instead. Also try adjusting screen brightness to maximum.
+TD005	C103	Customer	2026-04-16T19:00:00	The screenshot trick worked! I got in. But please fix this for the future.
+PR001	C101	Customer	2026-04-10T10:15:00	The website completely crashed when I clicked checkout. I lost all my selected seats and have to start over. This is very frustrating!
+PR001	SS001	Support Staff	2026-04-10T10:45:00	Hello John, I sincerely apologize. We are aware of this critical issue - it is affecting multiple users. Our engineering team has been alerted and is working on an urgent fix. ETA is approximately 2 hours.
+PR001	C101	Customer	2026-04-10T14:30:00	It is almost 4 hours now. Is it fixed? I need to complete my booking today before the seats sell out.
+PR001	SS001	Support Staff	2026-04-10T15:15:00	Great news - the fix was deployed at 15:00. The issue was a memory overflow in the checkout module. Your original seat selection has been preserved. Please try again now.
+PR001	C101	Customer	2026-04-10T16:30:00	It worked! Booking completed successfully. Thank you for holding my seats.
+PR002	C102	Customer	2026-04-10T11:45:00	I paid for two tickets but they are completely missing from my account. I have the bank charge confirmation. Order number ORD-2026-04-10-789456.
+PR002	SS002	Support Staff	2026-04-10T12:15:00	Hello Alex, I can see the payment was successfully processed on our end. The tickets appear to be stuck in a sync queue. Let me manually push them to your account now.
+PR002	C102	Customer	2026-04-10T12:35:00	Still not showing. How long will this take?
+PR002	SS002	Support Staff	2026-04-10T13:00:00	I have forced the sync. Please log out of your account completely and log back in. Your tickets should now appear.
+PR002	C102	Customer	2026-04-10T13:20:00	They are there now! Thank you. I was worried I had lost them.
+PR003	C103	Customer	2026-04-10T12:30:00	My promo code LOYALTY2026 says it is invalid at checkout but the email I received says it is valid until May 31. Please help.
+PR003	SS003	Support Staff	2026-04-10T13:00:00	Hello Mike, I can see the code in our system and it is valid. Can you confirm exactly where in the checkout you are entering it? Sometimes it needs to be on the payment step, not the cart.
+PR003	C103	Customer	2026-04-10T13:30:00	I was entering it on the cart page. Let me try on the payment step.
+PR003	SS003	Support Staff	2026-04-10T14:00:00	There is actually a bug where codes entered on the cart page are not being applied. I have reported this to development. In the meantime, please use the payment step to enter the code.
+PR003	C103	Customer	2026-04-10T14:20:00	It worked on the payment page! Thank you for figuring that out.
+PR004	C104	Customer	2026-04-10T15:00:00	The genre filter on the movie browse page is completely broken. I select Action and it shows everything including romance and documentaries.
+PR004	SS002	Support Staff	2026-04-10T15:30:00	Hello Sarah, thank you for reporting this. I have logged it as a bug and sent it to our development team. I will update you when there is a fix.
+PR004	M001	Manager	2026-04-10T16:00:00	PR004 logged and assigned to dev. Filter bug confirmed reproducible across all browsers.
+PR005	C109	Customer	2026-04-13T09:15:00	I have been trying to upload a profile picture for a week. I get a file format error even when using standard JPG photos from my phone.
+PR005	SS001	Support Staff	2026-04-13T09:45:00	Hello Jason, I can reproduce this issue. It seems our image validator has a bug where it rejects valid JPG files. I have flagged this to engineering.
+PR005	C109	Customer	2026-04-13T10:00:00	Thank you. Please let me know when it is fixed.
+PR006	C111	Customer	2026-04-14T16:45:00	I have clicked unsubscribe at least 5 times from your marketing emails over the past month and I am still receiving them. This should not be this hard.
+PR006	SS003	Support Staff	2026-04-14T17:15:00	Hello Bob, I sincerely apologize for this. I can see you have made multiple unsubscribe requests. I have manually removed you from all mailing lists right now. This will take effect within 24 hours.
+PR006	C111	Customer	2026-04-14T17:30:00	Finally! Thank you. It should not have taken this long.
+PR006	SS003	Support Staff	2026-04-14T17:45:00	You are absolutely right. I have also submitted a bug report to fix the unsubscribe endpoint so this does not happen to others.
+PR007	C112	Customer	2026-04-15T09:15:00	I received two separate booking confirmations for the exact same seat on the same date. How is that even possible?
+PR007	SS002	Support Staff	2026-04-15T09:45:00	Hello Jerry, this should never happen. I am investigating this immediately. Can you provide both confirmation numbers?
+PR007	C112	Customer	2026-04-15T10:00:00	Sure. Confirmation codes are BKG-20260415-001 and BKG-20260415-002. Both show Seat B8 Row 3 on April 20.
+PR007	SS002	Support Staff	2026-04-15T10:30:00	Found it. A race condition during a high-traffic period caused the same seat to be booked simultaneously by two sessions. I have voided the duplicate and initiated a refund. The valid booking BKG-20260415-001 remains active.
+PR007	M001	Manager	2026-04-15T11:00:00	Double booking incident reviewed. Root cause identified as session timeout race condition. Engineering team has been briefed. PR007 resolved successfully.
+CR001	C103	Customer	2026-04-09T09:45:00	Hello, I would like to change my seat for the April 25 concert from Row C Seat 12 to somewhere in the Orchestra section if possible.
+CR001	SS002	Support Staff	2026-04-09T10:15:00	Hello Mike, I can help with that. We have several Orchestra seats available for April 25. Would you prefer center or side?
+CR001	C103	Customer	2026-04-09T10:40:00	Center would be fantastic if available.
+CR001	SS002	Support Staff	2026-04-09T11:00:00	Great news! I have moved you from Row C Seat 12 to Orchestra Center Row A Seat 5. Your updated ticket confirmation has been sent to your email.
+CR001	C103	Customer	2026-04-09T11:15:00	Wonderful! Thank you so much for making that happen.
+CR002	C101	Customer	2026-04-11T08:15:00	Hi, I need to move my tickets from the 2 PM showing to the 7 PM evening showing on April 16. Is that possible?
+CR002	SS003	Support Staff	2026-04-11T08:45:00	Hello John, absolutely. The 7 PM showing still has availability. I will make that change for you now at no extra charge.
+CR002	C101	Customer	2026-04-11T09:00:00	That would be perfect, thank you!
+CR002	SS003	Support Staff	2026-04-11T09:20:00	Done! Your tickets have been updated to the 7 PM evening showing on April 16. New e-tickets sent to your email.
+CR003	C104	Customer	2026-04-13T13:15:00	Hi, my plans have changed and I can no longer attend on April 20. Is it possible to move my booking to April 27 for the same show?
+CR003	SS001	Support Staff	2026-04-13T13:45:00	Hello Sarah, of course. I can see seats are available on April 27 for the same show. I will make that change now.
+CR003	C104	Customer	2026-04-13T14:00:00	Thank you so much. I was worried I would have to forfeit the tickets.
+TK001	C101	Customer	2026-04-10T09:15:00	Hello, I wanted to ask how I can share a digital ticket with my friend who will be attending in my place? Can I transfer it to their account?
+TK001	SS001	Support Staff	2026-04-10T10:00:00	Hello John, you can transfer tickets through the My Tickets section. Click the ticket, select Transfer, and enter your friend's registered email address. They will receive the ticket instantly.
+TK001	C101	Customer	2026-04-10T10:15:00	That is really easy, thank you!
+TK002	C103	Customer	2026-04-10T13:35:00	We are planning a corporate event and expect around 30 people. What kind of group discounts does the theater offer?
+TK002	SS001	Support Staff	2026-04-10T14:00:00	Hello Mike, for groups of 10 or more we offer 15% off. For 25 or more it increases to 25% off. Dedicated group seating is also available. I can connect you with our corporate events team if you would like.
+TK002	C103	Customer	2026-04-10T14:15:00	25% for 30 people is great! Please do connect me with the events team.
+TK002	SS001	Support Staff	2026-04-10T14:30:00	Done. Our corporate events coordinator will contact you within one business day at your registered email. Thank you for choosing us for your company event!
+TK003	C102	Customer	2026-04-12T11:00:00	I have been a member for two years and I have attended over 20 shows. My loyalty points balance shows only 150 points which seems very low. Can you check?
+TK003	SS002	Support Staff	2026-04-12T11:30:00	Hello Alex, I am reviewing your account now. I can see your membership history. It looks like points from your bookings between January and March 2026 were not credited due to a system migration issue.
+TK003	C102	Customer	2026-04-12T11:45:00	Yes that is exactly the period. There were about 8 bookings during that time.
+TK003	SS002	Support Staff	2026-04-12T12:15:00	I have manually credited 480 missing points to your account bringing your total to 630. You should see the update immediately. I apologize for the inconvenience.
+RF008	SS003	Support Staff	2026-04-18T02:31:34.725417100	No refund for u :D
+RF008	C112	Customer	2026-04-18T02:34:54.035249500	:(
+RF005	SS003	Support Staff	2026-04-18T03:04:48.453284	The ticket will be closed then, thanks!
+RF005	SS003	Support Staff	2026-04-18T03:16:34.425850500	Ticket status changed to: CLOSED
+RF001	C112	Customer	2026-04-18T06:38:58.418796600	Nice

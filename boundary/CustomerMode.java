@@ -19,7 +19,7 @@ public class CustomerMode {
             System.out.println("Welcome, " + customer.getPronounce() + ". " + customer.getFirstName() + " " + customer.getLastName() + ".");
             System.out.println("1. Submit a new ticket"); 
             System.out.println("2. View my tickets"); 
-            System.out.println("3. Ticket Discussion"); 
+            System.out.println("3. Browse & Comment on Tickets"); 
             System.out.println("0. Logout");
             System.out.print("Enter your choice: ");
             switch (input.nextLine()) {
@@ -30,7 +30,7 @@ public class CustomerMode {
                     MyTicketsHandler.viewMyTickets(customer, input);
                     break;
                 case "3":
-                    DiscussionHandler.viewTicketDiscussion(customer, input);
+                    StaffTicketViewHandler.viewAllTickets(customer, input);
                     break;
                 case "0":
                     System.out.println("Logging out...");

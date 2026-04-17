@@ -8,18 +8,13 @@ A console-based Customer Relationship Management (CRM) system for a theater comp
 
 ### Prerequisites
 - Java Development Kit (JDK) 17 or later
-- Windows (the build script is a `.bat` file)
 
 ### Running the Application
 
-Double-click `run.bat`, or run it from a terminal:
+Double-click `TheaterCRM.bat`, or run it from a terminal:
 
-```bat
-.\run.bat
-```
-
-The script will:
-1. Compile all `.java` source files into the `build/` directory
+The .bat file will:
+1. Compile all `.java` source files into the `bin/` directory
 2. Launch the application from the project root so all `data/` file paths resolve correctly
 
 ---
@@ -28,10 +23,10 @@ The script will:
 
 ```
 Theater-Management-System/
-├── main.java                   # Entry point (~5 lines)
-├── run.bat                     # Build & run script
+├── main.java                   # Entry point
+├── TheaterCRM.bat              # Build & run program
 │
-├── boundary/                   # UI layer — menus and user interaction
+├── boundary/                   # CLI layer — menus and user interaction
 │   ├── StartMenu.java          # Login / Register / Exit
 │   ├── CustomerMode.java       # Customer dashboard
 │   ├── SupportStaffMode.java   # Support staff dashboard
@@ -40,7 +35,7 @@ Theater-Management-System/
 ├── control/                    # Business logic handlers
 │   ├── LoginRegistrationHandler.java
 │   ├── TicketSubmissionHandler.java
-│   ├── TicketHandler.java              # Shared ticket operations (view, comment, close)
+│   ├── TicketHandler.java              
 │   ├── MyTicketsHandler.java
 │   ├── StaffTicketViewHandler.java
 │   ├── ManagerTicketViewHandler.java
@@ -50,7 +45,7 @@ Theater-Management-System/
 │   ├── StaffInteractionHistoryHandler.java
 │   └── PerformanceReportHandler.java
 │
-├── entity/                     # Domain model
+├── entity/                     # Class entities
 │   ├── User.java
 │   ├── Customer.java
 │   ├── SupportStaff.java
@@ -63,25 +58,25 @@ Theater-Management-System/
 │   ├── OtherTicket.java
 │   ├── Comment.java
 │   ├── InteractionLog.java
-│   └── Discussable.java        # Interface for discussion thread
+│   └── Discussable.java       
 │
-├── doa/                        # Data Object Access — CSV read/write
+├── doa/                        # CSV read & write
 │   ├── UserFileLoader.java
 │   ├── TicketFileLoader.java
 │   └── DiscussionFileLoader.java
 │
-├── utility/
-│   ├── ConsoleUtil.java        # Screen clearing, formatting helpers
+├── utility/                    # Utilities
+│   ├── ConsoleUtil.java        # Clear screen, formatting helpers
 │   └── PasswordHasher.java     # Salt + hash for secure password storage
 │
 ├── data/                       # Flat-file persistence (CSV)
-│   ├── accounts.csv            # Hashed user accounts
 │   ├── accounts_unhashed.csv   # Plain-text reference (development only)
-│   ├── tickets.csv             # All tickets
+│   ├── accounts.csv            # Hashed user accounts
 │   ├── discussion.csv          # Discussion thread comments
+│   ├── tickets.csv             # All tickets
 │   └── interaction_log.csv     # Audit log of all interactions
 │
-└── build/                      # Compiled .class files (generated)
+└── bin/                      # precompiled .class files
 ```
 
 ---
