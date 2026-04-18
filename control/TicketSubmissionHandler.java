@@ -48,14 +48,20 @@ public class TicketSubmissionHandler {
                 System.out.print("Enter your choice: ");
                 String choice = input.nextLine();
 
-                if (choice.equals("0"))
+                if (choice.equals("0") || choice.isBlank() || choice.isEmpty()) {
+                        System.out.println("Error: Choice cannot be empty.");
+                        System.out.println("Press [ENTER] to return to main menu...");
+                        input.nextLine();
                         return;
+                }
 
                 System.out.println("=== Create New Ticket ===");
                 System.out.print("Enter ticket title: ");
                 String title = input.nextLine();
                 if (title.trim().isEmpty()) {
                         System.out.println("Error: Title cannot be empty.");
+                        System.out.println("Press [ENTER] to return to main menu...");
+                        input.nextLine();
                         return;
                 }
 
@@ -63,6 +69,8 @@ public class TicketSubmissionHandler {
                 String description = input.nextLine();
                 if (description.trim().isEmpty()) {
                         System.out.println("Error: Description cannot be empty.");
+                        System.out.println("Press [ENTER] to return to main menu...");
+                        input.nextLine();
                         return;
                 }
 
