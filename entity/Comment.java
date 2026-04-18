@@ -23,8 +23,8 @@ public class Comment {
         this.timestamp = timestamp;
     }
 
-    private static String getUserTypeFromClass(User user) {
-        String className = user.getClass().getSimpleName();
+    private String getUserTypeFromClass() {
+        String className = author.getClass().getSimpleName();
         return switch (className) {
             case "Manager" -> "Manager";
             case "SupportStaff" -> "Support Staff";
@@ -34,30 +34,49 @@ public class Comment {
     }
 
     private String getDerivedUserType() {
-        return getUserTypeFromClass(author);
+        return getUserTypeFromClass();
     }
 
     public String getFormattedComment() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("MMM dd, HH:mm");
-        return String.format("[%s] %s (%s): \"%s\"", 
+        return String.format("[%s] %s (%s): \"%s\"",
                 timestamp.format(fmt), author.getUsername(), getDerivedUserType(), content);
     }
 
     // Getters
-    public User getAuthor() { return author; }
-    public String getContent() { return content; }
-    public String getUserType() { return getDerivedUserType(); }
-    public LocalDateTime getTimestamp() { return timestamp; }
+    public User getAuthor() {
+        return author;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getUserType() {
+        return getDerivedUserType();
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
 
     // Setters
-    public void setAuthor(User author) { this.author = author; }
-    public void setContent(String content) { this.content = content; }
-    public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 
     @Override
     public String toString() {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return String.format("Comment [Author: %s (%s), Content: %s, Timestamp: %s]",
-            author.getUsername(), getDerivedUserType(), content, timestamp.format(fmt));
+                author.getUsername(), getDerivedUserType(), content, timestamp.format(fmt));
     }
 }

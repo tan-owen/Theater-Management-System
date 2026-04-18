@@ -27,9 +27,6 @@ public class ConsoleUtil {
 
     /**
      * Validates email format using a basic regex pattern.
-     * Accepts emails with format: localpart@domain.extension
-     * @param email The email address to validate
-     * @return true if email format is valid, false otherwise
      */
     public static boolean isValidEmail(String email) {
         if (email == null || email.trim().isEmpty()) {
@@ -42,9 +39,6 @@ public class ConsoleUtil {
 
     /**
      * Checks if username already exists in the user map.
-     * @param username The username to check
-     * @param userMap The map of existing users
-     * @return true if username already exists, false otherwise
      */
     public static boolean usernameExists(String username, java.util.Map<String, User> userMap) {
         if (username == null || username.trim().isEmpty()) {
