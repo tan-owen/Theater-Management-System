@@ -127,17 +127,26 @@ public class LoginRegistrationHandler {
         String firstName = input.nextLine();
         System.out.print("Please enter your last name: ");
         String lastName = input.nextLine();
-        System.out.print("Please enter your gender (M/F): ");
-        String gender = input.nextLine();
+        // Gender validation with exception handling
+        String pronounce = "";
+        boolean validGender = false;
+        while (!validGender) {
+            try {
+                System.out.print("Please enter your gender (M/F): ");
+                String gender = input.nextLine().trim();
 
-        // Map gender input to salutation
-        String pronounce;
-        if (gender.equalsIgnoreCase("M")) {
-            pronounce = "Mr";
-        } else if (gender.equalsIgnoreCase("F")) {
-            pronounce = "Ms";
-        } else {
-            pronounce = "Mr/Ms";
+                if (gender.equalsIgnoreCase("M")) {
+                    pronounce = "Mr";
+                    validGender = true;
+                } else if (gender.equalsIgnoreCase("F")) {
+                    pronounce = "Ms";
+                    validGender = true;
+                } else {
+                    throw new IllegalArgumentException("Invalid gender input. Please enter 'M' or 'F'.");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
         }
 
         // Generate a unique customer ID based on current user count
